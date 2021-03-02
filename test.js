@@ -9,3 +9,5 @@ function hej (){
 }
 
 console.log(hej());
+
+var Test1 = new Test("Test1");
