@@ -3,3 +3,7 @@ class Test{
         this.test = test;
     }
 }
+
+function hej (){
+    return 2 * 2;
+}
