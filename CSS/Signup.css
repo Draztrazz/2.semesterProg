@@ -6,6 +6,12 @@
     background-attachment: fixed; 
 }
 
+#header{
+    position: fixed;
+    top: 35%;
+    left: 50%;
+}
+
 #signup-box{
     position: fixed;
     top: 35%;
