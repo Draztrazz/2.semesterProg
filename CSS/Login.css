@@ -26,18 +26,16 @@
     background-image: linear-gradient(to right, #DA22FF 0%, #9733EE 51%, #DA22FF 100%);
     text-align: center;
     font-size: 100%;
-    background-color:royalblue;
     font-family: Arial, Helvetica, sans-serif;
     border: none;
     border-radius: 25px;
     color: white;
-    padding: 15px 62px;
+    padding: 13px 60px;
     text-decoration: none;
     display: inline-block;
     text-transform: uppercase;
     transition: 0.5s;
-    background-size: 200% auto;
-    color: white;            
+    background-size: 200% auto;            
     box-shadow: 0 0 20px #eee;
     display: block;
 }
