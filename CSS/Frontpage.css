@@ -7,18 +7,18 @@
 }
 
 #topnav {
+    float: right;
     overflow: hidden;
     background-color:whitesmoke;
-    width: 100%;
     opacity: 0.9;
     border-radius: 20px;
+    text-align: right;
 
   }
 
 #topnav a {
-    float: left;
     color: black;
-    padding: 14px 16px;
+    padding: 10px 10px 10px 10px;
     text-decoration: none;
     font-size: 25px;
 }
