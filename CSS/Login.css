@@ -23,6 +23,7 @@
 }
 
 #login-button{
+    background-image: linear-gradient(to right, #DA22FF 0%, #9733EE 51%, #DA22FF 100%);
     text-align: center;
     font-size: 100%;
     background-color:royalblue;
@@ -33,4 +34,16 @@
     padding: 15px 62px;
     text-decoration: none;
     display: inline-block;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    display: block;
+}
+
+#login-button:hover{
+    background-position: right center;
+    color: #ffff;
+    text-decoration: none;
 }
