@@ -5,71 +5,96 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
 </head>
-<body id="main">
-    <h1>Welcome to our wonderful dating-universe</h1>
-    <h2>Sign up and find your next lover </h2>
-        <p>Please fill out the below to create a profile </p>
+<body>
+    <h1>Velkommen til denne datingside</h1>
+    <h2>Opret en bruger for at komme i gang med at finde kærligheden</h2>
+        <p>Udfyld nedenstående informationer for at oprette en bruger</p>
     
 <form action="/createUserPost" method="POST">
 
     <div>
-        <label>Username</label>
+        <label>Brugernavn</label>
         <br>
         <input name="username" type="text" >
     </div>
+
     <br>
+
+
     <div>
         <label>Password</label>
         <br>
         <input  name="password" type="password">
     </div>
+
     <br>
+
     <div>
         <label>Email </label>
         <br>
         <input  name="email" type="email">
     </div>
+
     <br>
+
     <div>
-        <label>Age</label>
+        <label>Alder</label>
         <br>
         <input  name="Alder" type="number">
     </div>
+
     <br>
+
     <div>
-        <label>Firstname</label>
+        <label>Fornavn</label>
         <br>
-        <input  name="fornavn" type="text">   
+        <input  name="fornavn" type="text">
+        
     </div>
+
     <br>
+
     <div>
-        <label>Lastname</label>
+        <label>Efternavn</label>
         <br>
         <input  name="efternavn" type="text">
     </div>
+
     <br>
+
     <div>
-        <label>Gender</label>
+        <label>Køn</label>
             <br>
             <select name="Køn" id="Køn">
-                <option id="køn" name="køn" type="radio" value="Hankøn">Male</option>
-                <option id="køn" name="køn" type="radio" value="Hunkøn">Female</option>
+                <option id="køn" name="køn" type="radio" value="Hankøn">Hankøn</option>
+                <option id="køn" name="køn" type="radio" value="Hunkøn">Hunkøn</option>
             </select>
         <br>
   </div>
+
   <br>
+
   <div>
     <label>Bio</label>
-    <br>
-        <input name="Bio" type="text" placeholder="Show the datingworld who you are">
+        <br>
+       
+            <input name="Bio" type="text" placeholder="Fortæl om dig selv">
+        
     <br>
 </div>
+
     <br>
-        <button type="submit">Sign up</button>
+        <button type="submit">Opret Bruger</button>
+
     <br>
+
   <div >
-     <p>Already active and ready to mingle? <a href="./Login.html">Login</a></p>
+     <p>Allerede oprettet? <a href="/loginUser">Log ind her</a></p>
   </div>
+
 </form>
+
+  
+
 </body>
 </html>
