@@ -5,7 +5,7 @@ class Test{
 }
 
 function hej (){
-    return 2 * 2;
+    return 2 * 3;
 }
 
 console.log(hej());
