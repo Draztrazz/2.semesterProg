@@ -17,3 +17,7 @@
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+#login-button{
+    text-align: center;
+}
