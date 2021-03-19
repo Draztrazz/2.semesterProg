@@ -18,6 +18,19 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.login-button{
+    text-align: center;
+}
+
 #login-button{
     text-align: center;
+    font-size: 100%;
+    background-color:royalblue;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    padding: 15px 62px;
+    text-decoration: none;
+    display: inline-block;
 }
