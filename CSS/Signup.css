@@ -3,6 +3,17 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed;
-    
+    background-attachment: fixed; 
+}
+
+#signup-box{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+    background-color: white;
+    border: 20px solid white;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
