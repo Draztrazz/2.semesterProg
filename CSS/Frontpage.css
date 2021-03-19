@@ -5,3 +5,20 @@
     background-position: center center;
     background-attachment: fixed;
 }
+
+#topnav {
+    overflow: hidden;
+    background-color:whitesmoke;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 20px;
+
+  }
+
+#topnav a {
+    float: left;
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+}
