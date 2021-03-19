@@ -7,14 +7,12 @@
 }
 
 #header{
-    position: fixed;
-    top: 35%;
-    left: 50%;
+    text-align: center;
 }
 
 #signup-box{
     position: fixed;
-    top: 35%;
+    top: 30%;
     left: 50%;
     margin-top: -50px;
     margin-left: -100px;
