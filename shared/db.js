@@ -21,3 +21,24 @@ function startDB(){
 
 module.exports.sqlConnection = connection;
 module.exports.startDB = startDB;
+
+function select(username){
+    return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM [n].[n] where username = @n'
+    const request = new Request(sql, (err, rowcount) => {
+        if(err){
+            reject(err)
+            console.log(err)
+        } else if(rowcount == 0) {
+            reject({message: 'User does not exist'})
+        }
+    });
+    request.addParameter('n', TYPES.VarChar, username)
+
+    request.on('row', (columns) => {
+        resolve(columns)
+    });
+    connection.execSql(request)})
+    
+}
+module.exports.select = select;

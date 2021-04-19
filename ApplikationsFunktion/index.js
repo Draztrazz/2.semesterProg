@@ -8,6 +8,19 @@ module.exports = async function (context, req) {
     } catch (error){
         console.log("Couldn't connect to database due to error", error.message)
     }
+    switch(req.method){
+        case 'GET':
+            await get(context, req);
+            break;
+        case 'POST':
+            await post(context, req);
+            break
+        default:
+            context.res = {
+                body: "Please get or post"
+            };
+            break
+    }
 
     /*const name = (req.query.name || (req.body && req.body.name));
     const responseMessage = name
@@ -18,4 +31,19 @@ module.exports = async function (context, req) {
         // status: 200,  Defaults to 200 
         body: responseMessage
     };*/
+}
+
+async function get(context, req){
+    try{
+        let username = req.query.username;
+        let user = await db.select(username)
+        context.res = {
+            body: user
+        };
+    } catch(error) {
+        context.res = {
+            status: 400,
+            body: `No user - ${error.message}`
+        }
+    }
 }
