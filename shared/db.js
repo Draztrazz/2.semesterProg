@@ -33,7 +33,7 @@ function select(username){
             reject({message: 'User does not exist'})
         }
     });
-    request.addParameter('n', TYPES.VarChar, username)
+    request.addParameter('n', TYPES.Int, username)
 
     request.on('row', (columns) => {
         resolve(columns)
