@@ -12,47 +12,47 @@
             <h3>Please fill out the below form</h3>
     </div>
     
-<form action="/createUserPost" method="POST">
+<form id="form" method="POST">
 <div id="signup-box">
 
         <label>Username:</label>
     <br>
-        <input name="username" type="text" >
+        <input name="username" type="text" id="username">
     <br>
         <label>Password:</label>
     <br>
-        <input  name="password" type="password">
+        <input  name="password" type="password" id="password">
     <br>
         <label>Email:</label>
     <br>
-        <input  name="email" type="email">
+        <input  name="email" type="email" id="email">
     <br>
         <label>Age:</label>
     <br>
-        <input  name="Alder" type="number">
+        <input  name="Alder" type="number" id="age">
     <br>
         <label>Firstname:</label>
     <br>
-        <input  name="fornavn" type="text">
+        <input  name="fornavn" type="text" id="firstname">
     <br>
         <label>Lastname:</label>
     <br>
-        <input  name="efternavn" type="text">
+        <input  name="efternavn" type="text" id="lastname">
     <br>
         <label>Gender:</label>
             <br>
-            <select name="Køn" id="Køn">
-                <option id="køn" name="køn" type="radio" value="Hankøn">Male</option>
-                <option id="køn" name="køn" type="radio" value="Hunkøn">Female</option>
+            <select name="Køn">
+                <option id="gender" name="køn" type="radio" value="Hankøn">Male</option>
+                <option id="gender" name="køn" type="radio" value="Hunkøn">Female</option>
             </select>
         <br>
     <br>
     <label>Bio:</label>
         <br>
-            <input name="Bio" type="text" placeholder="Who are you?">
+            <input name="Bio" type="text"  id="bio" placeholder="Who are you?">
         <br>
     <br>
-        <button type="submit">Create Profile</button>
+        <button type="submit" name="Submit">Create Profile</button>
 
      <p>Already signed up?<a href="/Frontedend_HTML/Login.html">Login</a></p>
 </div>
