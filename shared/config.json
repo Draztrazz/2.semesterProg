@@ -1,14 +1,14 @@
-{  
-    "server": "eksamen-server.database.windows.net", 
+{
+    "server": "datingapp.database.windows.net", 
     "authentication": {
         "type": "default",
         "options": {
-            "userName": "Artemis", 
-            "password": "apollo123!" 
+            "userName": "admin123", 
+            "password": "abcd1234" 
         }
     },
     "options": {
         "encrypt": true,
-        "database": "Eksamendatabase"
+        "database": "Dating"
     }
-} 
+}
