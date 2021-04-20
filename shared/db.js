@@ -24,7 +24,7 @@ module.exports.startDB = startDB;
 
 function select(username){
     return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM [n].[n] where username = @n'
+    const sql = 'SELECT * FROM [users].[user] where username = @username'
     const request = new Request(sql, (err, rowcount) => {
         if(err){
             reject(err)
@@ -33,7 +33,7 @@ function select(username){
             reject({message: 'User does not exist'})
         }
     });
-    request.addParameter('n', TYPES.Int, username)
+    request.addParameter('username', TYPES.VarChar, username)
 
     request.on('row', (columns) => {
         resolve(columns)
