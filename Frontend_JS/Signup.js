@@ -18,13 +18,13 @@ form.addEventListener('submit', function(e) {
         body: JSON.stringify({
             username: username,
             password: password,
+            admin: admin,
             email: email,
-            age: age,
             firstname: firstname,
             lastname: lastname,
             gender: gender,
-            bio: bio,
-            admin: admin
+            age: age,
+            bio: bio
         }),
         headers: {
             "Content-Type": "application/json; charset-UTF-8"

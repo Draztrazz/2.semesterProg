@@ -24,7 +24,7 @@ module.exports.startDB = startDB;
 
 function insert(payload){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO [users].[user] (username, password, admin) VALUES (@username, @password, @admin)`
+        const sql = `INSERT INTO [users].[user] (username, password, admin, email, firstname, lastname, gender, age, bio) VALUES (@username, @password, @admin, @email, @firstname, @lastname, @gender, @age, @bio)`
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
@@ -34,6 +34,12 @@ function insert(payload){
         request.addParameter('username', TYPES.VarChar, payload.username)
         request.addParameter('password', TYPES.VarChar, payload.password)
         request.addParameter('admin', TYPES.Bit, payload.admin)
+        request.addParameter('email', TYPES.VarChar, payload.email)
+        request.addParameter('firstname', TYPES.VarChar, payload.firstname)
+        request.addParameter('lastname', TYPES.VarChar, payload.lastname)
+        request.addParameter('gender', TYPES.VarChar, payload.gender)
+        request.addParameter('age', TYPES.Int, payload.age)
+        request.addParameter('bio', TYPES.VarChar, payload.bio)
 
         request.on('requestCompleted', (row) => {
             console.log('User inserted', row);
