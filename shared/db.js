@@ -22,6 +22,31 @@ function startDB(){
 module.exports.sqlConnection = connection;
 module.exports.startDB = startDB;
 
+function insert(payload){
+    return new Promise((resolve, reject) => {
+        const sql = `INSERT INTO [users].[user] (username, password, admin) VALUES (@username, @password, @admin)`
+        const request = new Request(sql, (err) => {
+            if(err){
+                reject(err)
+                console.log(err)
+            }
+        });
+        request.addParameter('username', TYPES.VarChar, payload.username)
+        request.addParameter('password', TYPES.VarChar, payload.password)
+        request.addParameter('admin', TYPES.Bit, payload.admin)
+
+        request.on('requestCompleted', (row) => {
+            console.log('User inserted', row);
+            resolve('user inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+    return payload
+}
+module.exports.insert = insert;
+
+
 function select(username){
     return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM [users].[user] where username = @username'
