@@ -1,0 +1,35 @@
+#main {
+    background-image: url("../Images/scrolling-gradient.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+#topnav {
+    float: right;
+    overflow: hidden;
+    border-radius: 20px;
+    text-align: right;
+    padding: 15px 15px 15px 15px;
+
+  }
+
+#topnav a {
+    color: black;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+#loginlink {
+    padding-right: 15px;
+}
+
+#box {
+    background-color:whitesmoke;
+    opacity: 0.9;
+    float: right;
+    margin-left: 15px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+}
