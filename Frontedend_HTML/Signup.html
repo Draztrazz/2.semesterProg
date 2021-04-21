@@ -5,8 +5,66 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
 </head>
-<body id="main" >
-    <div id="header">
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Create account</h2>
+        </div>
+        <form class="form" id="form">
+            <div class="form-control">
+                <label>E-mail</label>
+                <input type="email" placeholder="name@mail.com" id="email">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label>Password</label>
+                <input type="password" placeholder="Password" id="password">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label>First name</label>
+                <input type="text" placeholder="John" id="firstname">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label>Last name</label>
+                <input type="text" placeholder="Doe" id="lastname">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label>Date of birth</label>
+                <input type="date" id="dot">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label>CPR</label>
+                <input type="number" placeholder="010101-xxxx" id="cpr">
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label>Gender</label>
+                <select>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-control">
+                <label>Image</label>
+                <input type="file" id="file" onchange="validateFile()">
+            </div>
+            <button>Submit</button>
+        </form>
+    </div>
+
+  
+    <script src="../Frontend_JS/Signup.js"></script>
+</body>
+</html>
+
+
+
+<!-- <div id="header">
         <h1>Welcome to this dating-universe </h1>
         <h2>Create an account to get started</h2>
     </div>
@@ -56,9 +114,4 @@
 
      <p>Already signed up?<a href="/Frontedend_HTML/Login.html">Login</a></p>
 </div>
-</form>
-
-  
-    <script src="../Frontend_JS/Signup.js"></script>
-</body>
-</html>
+</form>-->

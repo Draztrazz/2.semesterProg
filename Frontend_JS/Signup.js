@@ -1,7 +1,5 @@
 var form = document.getElementById('form');
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault()
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const email = document.getElementById('email').value;
@@ -12,7 +10,10 @@ form.addEventListener('submit', function(e) {
     const bio = document.getElementById('bio').value;
     const admin = 0;
 
-    checkInputs();
+form.addEventListener('submit', function(e) {
+    e.preventDefault()
+    
+
 
     fetch('http://localhost:7071/api/ApplikationsFunktion', {
         method: 'POST',
@@ -42,4 +43,23 @@ form.addEventListener('submit', function(e) {
 })
 
 function checkInputs(){
+    if (username === '') {
+        setErrorFor(username, 'Username cannot be blank');
+    } else {
+        setSuccesFor(username);
+    }
+}
+
+function setErrorFor(input, message) {
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small');
+
+    small.innerText = message;
+
+    formControl.className = 'form-control error';
+}
+
+function setSuccesFor(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'form-control succes';
 }
