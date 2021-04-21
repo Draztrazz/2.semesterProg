@@ -9,39 +9,28 @@ const gender = document.getElementById('gender');
 const bio = document.getElementById('bio');
 const admin = 0;
 
-const usernameValue = document.getElementById('username').value;
-const passwordValue = document.getElementById('password').value;
-const emailValue = document.getElementById('email').value;
-const ageValue = document.getElementById('age').value;
-const firstnameValue = document.getElementById('firstname').value;
-const lastnameValue = document.getElementById('lastname').value;
-const genderValue = document.getElementById('gender').value;
-const bioValue = document.getElementById('bio').value;
-
-
 form.addEventListener('submit', function(e) {
     e.preventDefault()
 
-    let inputValidated = true;
-
     checkInputs();
-
-        if(inputValidated == true){
-            postUser();
-        } else {
-            console.log('fail');
-            return false
-        }
 })
 
 function checkInputs(){
+    let inputValidated = true;
+
+    const usernameValue = username.value;
+    const passwordValue = password.value;
+    const emailValue = email.value;
+    const ageValue = age.value;
+    const firstnameValue = firstname.value;
+    const lastnameValue = lastname.value;
+    
     if (usernameValue === '') {
         setErrorFor(username, 'Username cannot be blank');
     } else {
         setSuccesFor(username);
     }
-
-    if (password === '') {
+    if (passwordValue === '') {
         setErrorFor(password, 'Password cannot be blank');
     } else {
         setSuccesFor(password);
@@ -66,6 +55,13 @@ function checkInputs(){
     } else {
         setSuccesFor(age);
     }
+
+    if(inputValidated == true){
+        postUser();
+    } else {
+        console.log('fail');
+        return false
+    }
 }
 
 function setErrorFor(input, message) {
@@ -87,15 +83,15 @@ function postUser(){
     fetch('http://localhost:7071/api/ApplikationsFunktion', {
         method: 'POST',
             body: JSON.stringify({
-                username: usernameValue,
-                password: passwordValue,
+                username: username.value,
+                password: password.value,
                 admin: admin,
-                email: emailValue,
-                firstname: firstnameValue,
-                lastname: lastnameValue,
-                gender: genderValue,
-                age: ageValue,
-                bio: bioValue
+                email: email.value,
+                firstname: firstname.value,
+                lastname: lastname.value,
+                gender: gender.value,
+                age: age.value,
+                bio: bio.value
             }),
                 headers: {
                     "Content-Type": "application/json; charset-UTF-8"
