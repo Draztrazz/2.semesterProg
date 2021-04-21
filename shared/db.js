@@ -51,25 +51,3 @@ function insert(payload){
     return payload
 }
 module.exports.insert = insert;
-
-
-function select(username){
-    return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM [users].[user] where username = @username'
-    const request = new Request(sql, (err, rowcount) => {
-        if(err){
-            reject(err)
-            console.log(err)
-        } else if(rowcount == 0) {
-            reject({message: 'User does not exist'})
-        }
-    });
-    request.addParameter('username', TYPES.VarChar, username)
-
-    request.on('row', (columns) => {
-        resolve(columns)
-    });
-    connection.execSql(request)})
-    
-}
-module.exports.select = select;
