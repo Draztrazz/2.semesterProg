@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../CSS/Login.css">
-    <title>Login</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../CSS/Login.css">
+        <title>Login</title>
+    </head>
 <body id="main">
     <div id="login-box">
-    <div>
-        <label>Username:</label>
-        <br>
-        <input name="username" type="text">
+        <form action="/login" method="POST">
+            <div>
+                <label>Username:</label>
+                <br>
+                <input name="username" type="text">
+            </div>
+            <div>
+                <label>Password:</label>
+                <br>
+                <input name="password" type="password">
+            </div>
+            <br>
+            <div class="login-button">
+                <button id="login-button">Login</button>
+            </div>
+        </form>
     </div>
-    <div>
-        <label>Password:</label>
-        <br>
-        <input name="password" type="password">
-    </div>
-    <br>
-    <div class="login-button">
-        <button id="login-button">Login</button>
-    </div>
-    </div>
+<script src="../Frontend_JS/login.js"></script>        
 </body>
 </html>
