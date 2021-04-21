@@ -2,15 +2,17 @@ var form = document.getElementById('form');
 
 form.addEventListener('submit', function(e) {
     e.preventDefault()
-    var username = document.getElementById('username').value
-    var password = document.getElementById('password').value
-    var email = document.getElementById('email').value
-    var age = document.getElementById('age').value
-    var firstname = document.getElementById('firstname').value
-    var lastname = document.getElementById('lastname').value
-    var gender = document.getElementById('gender').value
-    var bio = document.getElementById('bio').value
-    var admin = 0
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const age = document.getElementById('age').value;
+    const firstname = document.getElementById('firstname').value;
+    const lastname = document.getElementById('lastname').value;
+    const gender = document.getElementById('gender').value;
+    const bio = document.getElementById('bio').value;
+    const admin = 0;
+
+    checkInputs();
 
     fetch('http://localhost:7071/api/ApplikationsFunktion', {
         method: 'POST',
@@ -38,3 +40,6 @@ form.addEventListener('submit', function(e) {
         console.log(err)
     })
 })
+
+function checkInputs(){
+}
