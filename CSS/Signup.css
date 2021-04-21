@@ -1,16 +1,111 @@
+*{
+    box-sizing: border-box;
+}
+
 .main{
     background-image: url("../Images/scrolling-gradient.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
     background-attachment: fixed; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/*#header{
+
+.header1{
     text-align: center;
 }
 
-#signup-box{
+.container{
+    background-color: white;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 100%;
+}
+
+.header2{
+    background-color: #f7f7ff;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 20px 40px;
+    text-align: center;
+}
+
+.header2 h2{
+    margin: 0;
+}
+
+.form{
+    padding: 30px 40px;
+}
+
+.form-control{
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.form-control label{
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-control.error input{
+    border-color: red;
+}
+
+.form-control small{
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.form-control.error small{
+    color: red;
+    visibility: visible;
+}
+
+.form button{
+    background-image: linear-gradient(to right, #DA22FF 0%, #9733EE 51%, #DA22FF 100%);
+    text-align: center;
+    font-size: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    padding: 13px 60px;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;            
+    box-shadow: 0 0 20px #eee;
+    width: 100%;
+}
+
+.form button:hover{
+    background-position: right center;
+    color: #ffff;
+    text-decoration: none;
+}
+
+/*
+.signup-box{
     opacity: 0.9;
     position: fixed;
     top: 30%;
@@ -21,5 +116,5 @@
     border: 50px solid white;
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
-}*/
-
+}
+*/
