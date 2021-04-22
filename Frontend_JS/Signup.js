@@ -12,6 +12,18 @@ const admin = 0;
 form.addEventListener('submit', function(e) {
     e.preventDefault()
 
+    module.exports = {
+        username: username.value,
+        password: password.value,
+        email: email.value,
+        age: age.value,
+        firstname: firstname.value,
+        lastname: lastname.value,
+        gender: gender.value,
+        bio: bio.value,
+        admin: admin
+    }
+
     checkInputs();
 })
 
