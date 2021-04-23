@@ -12,18 +12,6 @@ const admin = 0;
 form.addEventListener('submit', function(e) {
     e.preventDefault()
 
-    module.exports = {
-        username: username.value,
-        password: password.value,
-        email: email.value,
-        age: age.value,
-        firstname: firstname.value,
-        lastname: lastname.value,
-        gender: gender.value,
-        bio: bio.value,
-        admin: admin
-    }
-
     checkInputs();
 })
 
@@ -63,7 +51,7 @@ function checkInputs(){
         setSuccesFor(lastname);
     }
     if (ageValue === '') {
-        setErrorFor(age, 'age cannot be blank');
+        setErrorFor(age, 'Age cannot be blank');
     } else {
         setSuccesFor(age);
     }
@@ -109,10 +97,9 @@ function postUser(){
                     "Content-Type": "application/json; charset-UTF-8"
                 }
             })
-            .then((response) => {
-                return response.json()
-            })
+            .then(res => res.json())
             .then((data) => {
+                
                 console.log(data)
             }) .catch((err) =>{
                 console.log(err)

@@ -1,4 +1,5 @@
 const db = require('../shared/db');
+const signupController = require('../Controller/signupController');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
@@ -56,9 +57,12 @@ async function get(context, req){
 async function post(context, req){
     try{
         let payload = req.body;
-        await db.insert(payload)
-        context.res = {
-            body: {status: 'Succes'}
+        await signupController.checkInputs(payload)
+        if(signupController.checkInputs.resolved(payload)){
+            await db.insert(payload)
+            context.res = {
+                body: {status: 'Succes'}
+                }
         }
     } catch(error) {
         context.res = {
