@@ -24,20 +24,8 @@ module.exports = async function (context, req) {
     }
 }
 
-class User{
-    constructor(username, password, admin, email, firstname, lastname, gender, age,  bio){
-        this.username = username,
-        this.password = password,
-        this.admin = admin,
-        this.email = email,
-        this.firstname = firstname,
-        this.lastname = lastname,
-        this.gender = gender,
-        this.age = age,
-        this.bio = bio
-    }
-}
-module.exports = User
+
+//module.exports = User
 
 async function get(context, req){
     try{

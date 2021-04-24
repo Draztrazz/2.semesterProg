@@ -1,8 +1,21 @@
-const User = require('../ApplikationsFunktion/index');
+/*const User = require('../ApplikationsFunktion/index.js');
 
 const user1 = new User('mike123', 'password', 0, 'asfas@asfasf.dc', 'sfdasfs', 'sadsaas', 'male', 22, 'safasa');
 
-console.log(user1)
+console.log(user1)*/
+class User{
+    constructor(username, password, admin, email, firstname, lastname, gender, age,  bio){
+        this.username = username,
+        this.password = password,
+        this.admin = admin,
+        this.email = email,
+        this.firstname = firstname,
+        this.lastname = lastname,
+        this.gender = gender,
+        this.age = age,
+        this.bio = bio
+    }
+}
 
 function checkInputs(payload){
     return new Promise((resolve, reject) => {

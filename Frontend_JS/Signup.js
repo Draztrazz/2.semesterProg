@@ -71,7 +71,7 @@ function setErrorFor(input, message) {
 
     formControl.className = 'form-control error';
 
-    inputValidated = false;
+    //inputValidated = false;
 }
 
 function setSuccesFor(input) {
