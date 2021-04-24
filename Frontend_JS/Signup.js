@@ -80,7 +80,7 @@ function setSuccesFor(input) {
 }
 
 function postUser(){
-    fetch('http://localhost:7071/api/ApplikationsFunktion', {
+    fetch('http://localhost:7071/api/signup', {
         method: 'POST',
             body: JSON.stringify({
                 username: username.value,
