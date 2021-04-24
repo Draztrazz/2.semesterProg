@@ -67,7 +67,7 @@ function select(username, password){
         request.addParameter('password', TYPES.VarChar, password)
     
         request.on('row', (columns) => {
-            resolve(columns)
+            resolve(true)
         });
         connection.execSql(request)
     })
