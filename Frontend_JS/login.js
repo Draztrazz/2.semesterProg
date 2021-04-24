@@ -2,26 +2,18 @@ var form = document.getElementById('loginform');
 
 form.addEventListener('submit', function(e) {
     e.preventDefault()
-    var username = document.getElementById('username').value
-    var password = document.getElementById('password').value
-
-
-    fetch('login', {
-        method: 'POST',
-        body: JSON.stringify({
-            username: username,
-            password: password,
-        }),
-        headers: {
-            "Content-Type": "application/json; charset-UTF-8"
-        }
-    })
-    .then((response) => {
-        return response.json()
-    })
-    .then((data) => {
-        console.log(data)
-    }) .catch((err) =>{
-        console.log(err)
-    })
+    let username = document.getElementById('username')
+    let password = document.getElementById('password')
+    loginuser()
 })
+
+
+function loginuser(){
+    fetch('http://localhost:7071/api/login', {
+        method: 'POST',
+            body: JSON.stringify({
+                username: username.value,
+                password: password.value
+            })
+})
+console.log("test")}
