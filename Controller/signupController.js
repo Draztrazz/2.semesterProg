@@ -32,15 +32,14 @@ function checkInputs(payload){
         payload.bio
     );
     if(newUser.username == ''){
-        newUser.username = 0;
         inputValidated = false
     } 
     if(inputValidated == false){
-        reject(newUser)
+        reject({message: 'Something went wrong'})
     } else {
         resolve(newUser)
     }
     })
 }
 
-module.exports.checkInputs = checkInputs
+//module.exports.checkInputs = checkInputs
