@@ -6,7 +6,7 @@ form.addEventListener('submit', function(e) {
     var password = document.getElementById('password').value
 
 
-    fetch('http://localhost:7071/api/ApplikationsFunktion', {
+    fetch('login', {
         method: 'POST',
         body: JSON.stringify({
             username: username,
