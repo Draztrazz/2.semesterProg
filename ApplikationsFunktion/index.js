@@ -57,12 +57,16 @@ async function get(context, req){
 async function post(context, req){
     try{
         let payload = req.body;
-        await signupController.checkInputs(payload)
+        //await signupController.checkInputs(payload)
         if(signupController.checkInputs.resolved(payload)){
             await db.insert(payload)
             context.res = {
                 body: {status: 'Succes'}
                 }
+        } else {
+            context.res = {
+                body: {status: 'Fail'}
+            }
         }
     } catch(error) {
         context.res = {
