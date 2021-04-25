@@ -2,16 +2,14 @@ const form = document.getElementById('form');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
 const email = document.getElementById('email');
-const age = document.getElementById('age');
+const dob = document.getElementById('dob');
 const firstname = document.getElementById('firstname');
 const lastname = document.getElementById('lastname');
 const gender = document.getElementById('gender');
 const bio = document.getElementById('bio');
-const admin = 0;
 
 form.addEventListener('submit', function(e) {
     e.preventDefault()
-
     checkInputs();
 })
 
@@ -21,45 +19,50 @@ function checkInputs(){
     const usernameValue = username.value;
     const passwordValue = password.value;
     const emailValue = email.value;
-    const ageValue = age.value;
+    const dobValue = dob.value;
     const firstnameValue = firstname.value;
     const lastnameValue = lastname.value;
     
-    if (usernameValue === '') {
-        setErrorFor(username, 'Username cannot be blank');
+    if (usernameValue == '' || usernameValue.length < 8 || usernameValue.length > 20) {
+        setErrorFor(username, 'Username must be between 8 and 20 characters long.');
     } else {
         setSuccesFor(username);
     }
-    if (passwordValue === '') {
-        setErrorFor(password, 'Password cannot be blank');
+    if (passwordValue == '' || passwordValue.length < 8 || passwordValue.length > 20) {
+        setErrorFor(password, 'Password must be between 8 and 20 characters long.');
     } else {
         setSuccesFor(password);
     }
-    if (emailValue === '') {
-        setErrorFor(email, 'E-mail cannot be blank');
+    if (emailValue == '') {
+        setErrorFor(email, 'E-mail cannot be blank.');
     } else {
         setSuccesFor(email);
     }
-    if (firstnameValue === '') {
-        setErrorFor(firstname, 'First name cannot be blank');
+    if (firstnameValue == '') {
+        setErrorFor(firstname, 'First name cannot be blank.');
+    } else if (firstnameValue.length > 20) {
+        setErrorFor(firstname, 'First name cannot be longer than 20 characters.');
     } else {
         setSuccesFor(firstname);
     }
-    if (lastnameValue === '') {
-        setErrorFor(lastname, 'Last name cannot be blank');
+    if (lastnameValue == '') {
+        setErrorFor(lastname, 'Last name cannot be blank.');
+    } else if (lastnameValue.length > 20) {
+        setErrorFor(lastname, 'Last name cannot be longer than 20 characters.');
     } else {
         setSuccesFor(lastname);
     }
-    if (ageValue === '') {
-        setErrorFor(age, 'Age cannot be blank');
+    if (dobValue == '') {
+        setErrorFor(dob, 'Date of birth cannot be blank.');
+    } else if (calculate_age(dobValue) < 18) {
+        setErrorFor(dob, 'You must 18 or older to use this app.');
     } else {
-        setSuccesFor(age);
+        setSuccesFor(dob);
     }
 
     if(inputValidated == true){
         postUser();
     } else {
-        console.log('fail');
         return false
     }
 }
@@ -71,7 +74,7 @@ function setErrorFor(input, message) {
 
     formControl.className = 'form-control error';
 
-    //inputValidated = false;
+    inputValidated = false;
 }
 
 function setSuccesFor(input) {
@@ -85,12 +88,11 @@ function postUser(){
             body: JSON.stringify({
                 username: username.value,
                 password: password.value,
-                admin: admin,
                 email: email.value,
                 firstname: firstname.value,
                 lastname: lastname.value,
                 gender: gender.value,
-                age: age.value,
+                age: dob.value,
                 bio: bio.value
             }),
                 headers: {
@@ -104,4 +106,10 @@ function postUser(){
             }) .catch((err) =>{
                 console.log(err)
             })
+}
+
+function calculate_age(dob) {
+    var ageDif = Date.now() - new Date(dob).getTime();
+    var ageDate = new Date(ageDif); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
