@@ -59,6 +59,9 @@ function checkInputs(){
     } else {
         setSuccesFor(dob);
     }
+    /*if (bioValue == ''){
+        bioValue = 'You have not yet written your own bio.'
+    }*/
 
     if(inputValidated == true){
         postUser();
@@ -92,7 +95,8 @@ function postUser(){
                 firstname: firstname.value,
                 lastname: lastname.value,
                 gender: gender.value,
-                age: dob.value,
+                dob: dob.value,
+                admin: 0,
                 bio: bio.value
             }),
                 headers: {
