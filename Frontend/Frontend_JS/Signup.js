@@ -105,8 +105,11 @@ function postUser(){
             })
             .then(res => res.json())
             .then((data) => {
-                
                 console.log(data)
+                if(data = 'Succes') {
+                    location.href = '../Frontend_HTML/Frontpage.html';
+                    alert('Your account was created. Log in to start matching!')
+                }
             }) .catch((err) =>{
                 console.log(err)
             })
