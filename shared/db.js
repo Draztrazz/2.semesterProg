@@ -56,8 +56,9 @@ module.exports.insert = insert;
 function select(username, password){
     return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM [users].[user] where username = @username AND password = @password'
-    const request = new Request(sql, (err, rowcount) => {
-        if(rowcount == 0) {
+    const request = new Request(sql, (err, rowCount) => {
+        console.log(rowCount) //Why is rowcount undefined??
+        if(rowCount == 0) { //wont work if rowcount is undefined
             reject({message: 'User does not exist'})}
          else if(err){
             reject(err)
