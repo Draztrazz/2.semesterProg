@@ -18,6 +18,23 @@ module.exports = async function (context, req) {
     }
 }
 
+async function get(context, req){
+    try{
+        let username = req.query.username;
+        let password = req.query.password;
+        let user = await db.select(username, password)
+        context.res = {
+            body: user
+        };
+    } catch(error) {
+        context.res = {
+            //status: 400,
+            body: `No user - ${error.message}`
+        }
+    }
+}
+
+/*
 async function post(context, req){
     try{
         let username = req.body.username;
@@ -31,4 +48,4 @@ async function post(context, req){
             body: `No user - ${error.message}`
         }
     }
-}
+}*/

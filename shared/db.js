@@ -52,6 +52,30 @@ function insert(payload){
 }
 module.exports.insert = insert;
 
+
+function select(username, password){
+    return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM [users].[user] where username = @username AND password = @password'
+    const request = new Request(sql, (err, rowcount) => {
+        if(rowcount == 0) {
+            reject({message: 'User does not exist'})}
+         else if(err){
+            reject(err)
+            console.log(err)
+        } 
+    });
+    request.addParameter('username', TYPES.VarChar, username)
+    request.addParameter('password', TYPES.VarChar, password)
+
+    request.on('row', (columns) => {
+        resolve(columns)
+    });
+    connection.execSql(request)})
+    
+}
+module.exports.select = select;
+
+/*
 function select(username, password){
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * from users.[user] WHERE password = @password AND username = @username'
@@ -73,4 +97,4 @@ function select(username, password){
     })
 
 }
-module.exports.select = select;
+module.exports.select = select;*/

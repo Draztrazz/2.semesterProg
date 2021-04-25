@@ -1,4 +1,30 @@
-var form = document.getElementById('loginform');
+const form = document.getElementById('loginform');
+const username = document.getElementById('username')
+const password = document.getElementById('password')
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault()
+
+    let username1 = document.getElementById('username').value
+    let password1 = document.getElementById('password').value
+
+    fetch(`http://localhost:7071/api/login?username=${username1}&password=${password1}`)
+        .then((resp) => resp.json()
+            /*if(response.status !==  200){
+                console.log("Something went wrong" + response.status)
+                return
+            }*/
+        )
+        .then(function(data) {
+            console.log(data);
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+})
+
+
+/*var form = document.getElementById('loginform');
 
 form.addEventListener('submit', function(e) {
     e.preventDefault()
@@ -16,4 +42,4 @@ function loginuser(){
                 password: password.value
             })
 })
-console.log("test")}
+console.log("test")}*/
