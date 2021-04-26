@@ -18,6 +18,7 @@ form.addEventListener('submit', function(e) {
         .then(function(data) {
             console.log(data);
             localStorage.setItem("JWT", data);
+            location.href = '../Frontend_HTML/Homepage.html';;
         })
         .catch(function(err){
             console.log(err)
