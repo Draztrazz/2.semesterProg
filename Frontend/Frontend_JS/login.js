@@ -17,6 +17,7 @@ form.addEventListener('submit', function(e) {
         )
         .then(function(data) {
             console.log(data);
+            localStorage.setItem("JWT", data);
         })
         .catch(function(err){
             console.log(err)
