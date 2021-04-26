@@ -53,9 +53,9 @@ function insert(payload){
 module.exports.insert = insert;
 
 
-function select(username){
+function select(username, password){
     return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM [users].[user] where username = @username'
+    const sql = 'SELECT * FROM [users].[user] where username = @username AND password = @password'
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
@@ -65,7 +65,7 @@ function select(username){
         }
     );
     request.addParameter('username', TYPES.VarChar, username)
-    //request.addParameter('password', TYPES.VarChar, password)
+    request.addParameter('password', TYPES.VarChar, password)
 
     request.on('row', (columns) => {
         resolve(columns)

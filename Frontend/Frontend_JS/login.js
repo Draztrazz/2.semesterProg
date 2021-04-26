@@ -8,7 +8,7 @@ form.addEventListener('submit', function(e) {
     let username1 = document.getElementById('username').value
     let password1 = document.getElementById('password').value
 
-    fetch(`http://localhost:7071/api/login?username=${username1}`)
+    fetch(`http://localhost:7071/api/login?username=${username1}&password=${password1}`)
         .then((resp) => resp.json()
             /*if(response.status !==  200){
                 console.log("Something went wrong" + response.status)
@@ -20,7 +20,7 @@ form.addEventListener('submit', function(e) {
         })
         .catch(function(err){
             console.log(err)
-            alert('Either username or password were incorrect')
+            alert('Either username or password is incorrect.')
         })
 })
 
