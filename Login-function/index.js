@@ -3,6 +3,11 @@ const db = require('../shared/db');
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')
 
+    try{
+        await db.startDB(); //start DB connection
+    } catch (error){
+        console.log("Couldn't connect to database due to error", error.message)
+    }
     switch (req.method) {
         case 'GET':
             await get(context, req);
@@ -21,7 +26,6 @@ module.exports = async function (context, req) {
 async function get(context, req){
     try{
         let username = req.query.username;
-        //let password = req.query.password;
         let user = await db.select(username)
         context.res = {
             body: user

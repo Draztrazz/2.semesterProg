@@ -57,7 +57,6 @@ function select(username){
     return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM [users].[user] where username = @username'
     const request = new Request(sql, (err, rowCount) => {
-        console.log(rowCount) //Why is rowcount undefined??
          if(err){
             reject(err)
             console.log(err)
