@@ -7,3 +7,16 @@ async function generateToken(user){
 }
 
 module.exports.generateToken = generateToken;
+
+
+async function authenticateToken(req, res){
+    const token = req.query.id
+    if (token == null) return res.sendStatus(401)
+
+    jwt.verify(token, 'secretkey', (err, user) => {
+        if (err) return res.sendStatus(403)
+        req.user = user
+        return true
+    })
+}
+module.exports.authenticateToken = authenticateToken

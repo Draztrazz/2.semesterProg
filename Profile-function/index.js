@@ -1,4 +1,5 @@
 const db = require('../shared/db');
+const jwtController = require('../Controller/JWTcontroller');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
@@ -25,12 +26,9 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        console.log(req.query.id)
-        /*let username = req.query.username;
-        let user = await db.select(username)
-        context.res = {
-            body: user
-        };*/
+        if(jwtController.authenticateToken(req, res)==true){
+            console.log('test')
+        }
     } catch(error) {
         context.res = {
             status: 400,
