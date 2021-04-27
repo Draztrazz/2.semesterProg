@@ -9,14 +9,16 @@ async function generateToken(user){
 module.exports.generateToken = generateToken;
 
 
-async function authenticateToken(req, res){
+async function authenticateToken(req){
     const token = req.query.id
-    if (token == null) return res.sendStatus(401)
+    if (token == null){return res.sendStatus(401)}
 
     jwt.verify(token, 'secretkey', (err, user) => {
-        if (err) return res.sendStatus(403)
+        if (err){throw err}
         req.user = user
-        return true
+        console.log("jwttest")
+        return req.user
     })
+ 
 }
 module.exports.authenticateToken = authenticateToken
