@@ -26,6 +26,23 @@ form.addEventListener('submit', function(e) {
         })
 })
 
+/* //Denne post method vil senere skulle bruges når login siden loader for at se om brugeren allerede bør været logget ind, i så fald redirect dem til homepage
+fetch('http://localhost:7071/api/login', { 
+        method: 'POST',
+            body: JSON.stringify({
+                
+            }),
+                headers: {
+                    "Content-Type": "application/json; charset-UTF-8"
+                }
+            })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+            }) .catch((err) =>{
+                console.log(err)
+            })
+*/
 
 /*var form = document.getElementById('loginform');
 
