@@ -23,9 +23,6 @@ module.exports = async function (context, req) {
     }
 }
 
-
-//module.exports = User
-
 async function get(context, req){
     try{
         let username = req.query.username;
