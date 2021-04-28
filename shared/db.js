@@ -33,7 +33,7 @@ function insert(payload){
         });
         request.addParameter('username', TYPES.VarChar, payload.username)
         request.addParameter('password', TYPES.VarChar, payload.password)
-        request.addParameter('admin', TYPES.Bit, payload.admin)
+        request.addParameter('admin', TYPES.Bit, 0)
         request.addParameter('email', TYPES.VarChar, payload.email)
         request.addParameter('firstname', TYPES.VarChar, payload.firstname)
         request.addParameter('lastname', TYPES.VarChar, payload.lastname)

@@ -96,7 +96,6 @@ function postUser(){
                 lastname: lastname.value,
                 gender: gender.value,
                 dob: dob.value,
-                admin: 0,
                 bio: bio.value
             }),
                 headers: {
@@ -117,6 +116,6 @@ function postUser(){
 
 function calculate_age(dob) {
     var ageDif = Date.now() - new Date(dob).getTime();
-    var ageDate = new Date(ageDif); // miliseconds from epoch
+    var ageDate = new Date(ageDif);
     return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
