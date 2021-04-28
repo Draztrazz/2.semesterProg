@@ -26,13 +26,14 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        let user = await jwtController.authenticateToken(req)
-            console.log('test')
-            context.res = {
-                body: user
+        var id = await jwtController.authenticateToken(req)
+        console.log(id)
+        context.res = {
+            body: id
             }
         }
     catch(error) {
+        console.log("get error")
         context.res = {
             status: 400,
             body: `Error - ${error.message}`
