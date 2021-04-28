@@ -48,7 +48,6 @@ function insert(payload){
         connection.execSql(request)
 
     });
-    return payload
 }
 module.exports.insert = insert;
 
