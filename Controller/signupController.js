@@ -2,7 +2,7 @@
 
 const user1 = new User('mike123', 'password', 0, 'asfas@asfasf.dc', 'sfdasfs', 'sadsaas', 'male', 22, 'safasa');
 
-console.log(user1)*/
+console.log(user1)
 class User{
     constructor(username, password, admin, email, firstname, lastname, gender, age,  bio){
         this.username = username,
@@ -58,4 +58,4 @@ function checkInputs(payload){
     })
 }
 
-//module.exports.checkInputs = checkInputs
+module.exports.checkInputs = checkInputs*/
