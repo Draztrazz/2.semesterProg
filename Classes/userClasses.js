@@ -1,5 +1,6 @@
 class User{
-    constructor(username, password, email, firstname, lastname, gender, dob,  bio){
+    constructor(id, username, password, email, firstname, lastname, gender, dob,  bio){
+        this.id = id;
         this.username = username,
         this.password = password,
         this.email = email,
@@ -14,8 +15,8 @@ class User{
 
 
 class Admin extends User{
-    constructor(username, password, admin, email, firstname, lastname, gender, age, bio){
-        super(username, password, email, firstname, lastname, gender, age,  bio)
+    constructor(id, username, password, admin, email, firstname, lastname, gender, age, bio){
+        super(id, username, password, email, firstname, lastname, gender, age,  bio)
         this.admin = admin
     }
 }
