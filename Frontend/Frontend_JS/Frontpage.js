@@ -6,10 +6,10 @@ window.addEventListener('load', () => {
         )
         .then(function(data) {
             console.log(data);
+            location.href = '../Frontend_HTML/Homepage.html'
         })
         .catch(function(err){
             console.log(err)
-            location.href = '../Frontend_HTML/Frontpage.html'
         })
 })
 

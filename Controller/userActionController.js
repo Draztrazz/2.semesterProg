@@ -33,3 +33,7 @@ async function loggedIn(user){
 }
 
 module.exports.loggedIn = loggedIn;
+
+async function adminCheck(){
+
+}

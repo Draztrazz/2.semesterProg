@@ -93,4 +93,4 @@ function idSelect(id){
     connection.execSql(request)})
     
 }
-module.exports.select = select;
+module.exports.idSelect = idSelect;
