@@ -27,9 +27,9 @@ module.exports = async function (context, req) {
 async function get(context, req){
     try{
         var id = await jwtController.authenticateToken(req)
-        console.log(id)
+        let user = await db.idSelect(id)
         context.res = {
-            body: id
+            body: user
             }
         }
     catch(error) {
