@@ -1,10 +1,7 @@
 let jwt = localStorage.getItem("JWT");
 
 
-let getButton = document.getElementById("getuser");
-
-getButton.addEventListener("click", function(){
-
+window.addEventListener('load', ()=>{
     fetch(`http://localhost:7071/api/profile?id=${jwt}`)
         .then((resp) => resp.json()
         )
