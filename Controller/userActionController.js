@@ -35,5 +35,9 @@ async function loggedIn(user){
 module.exports.loggedIn = loggedIn;
 
 async function adminCheck(){
-
+    if(loggedUser == true){
+        return 'Plebian'
+    } else if(adminUser == true){
+        return 'Demi-god'
+    }
 }
