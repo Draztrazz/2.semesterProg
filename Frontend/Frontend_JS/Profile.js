@@ -43,7 +43,7 @@ deleteButton.addEventListener("click", function(){
             )
             .then(function(data) {
                 console.log(data)
-                location.href = '../Frontend_HTML/Frontpage.html'
+                location.href = '../Frontend_HTML/Frontpage.html';
             })
             .catch(function(err){
                 console.log(err)
