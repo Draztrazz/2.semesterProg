@@ -94,3 +94,24 @@ function idSelect(id){
     
 }
 module.exports.idSelect = idSelect;
+
+function idDelete(id){
+    return new Promise((resolve, reject) => {
+    const sql = 'DELETE FROM [users].[user] where id = @id'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount == 0) {
+            reject({message: 'Cannot delete profile - something went wrong'})}
+        }
+    );
+    request.addParameter('id', TYPES.Int, id)
+
+    //request.on('row', (columns) => {
+        resolve("Profile has been deleted")
+    //});
+    connection.execSql(request)})
+    
+}
+module.exports.idDelete = idDelete;

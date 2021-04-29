@@ -16,6 +16,9 @@ module.exports = async function (context, req) {
         case 'POST':
             await post(context, req);
             break
+        case 'DELETE':
+            await deleteFunction(context, req);
+            break
         default:
             context.res = {
                 body: "Please get or post"
@@ -28,6 +31,24 @@ async function get(context, req){
     try{
         var id = await jwtController.authenticateToken(req)
         let user = await db.idSelect(id)
+        context.res = {
+            body: user
+            }
+        }
+    catch(error) {
+        console.log("get error")
+        context.res = {
+            status: 400,
+            body: `Error - ${error.message}`
+        }
+    }
+}
+
+async function deleteFunction(context, req){
+    try{
+       var id = await jwtController.authenticateToken(req)
+       let user = await db.idDelete(id)
+       console.log(id)
         context.res = {
             body: user
             }
