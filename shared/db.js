@@ -115,3 +115,31 @@ function idDelete(id){
     
 }
 module.exports.idDelete = idDelete;
+
+function idUpdate(id){
+    return new Promise((resolve, reject) => {
+    const sql = 'UPDATE [users].[user] SET username =@username , email =@email, firstname =@firstname, lastname =@lastname, gender =@gender, dob =@dob, bio =@bio  WHERE id =@id'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount == 0) {
+            reject({message: 'Cannot update profile - something went wrong'})}
+        }
+    );
+    request.addParameter('username', TYPES.VarChar, payload.username)
+    request.addParameter('email', TYPES.VarChar, payload.email)
+    request.addParameter('firstname', TYPES.VarChar, payload.firstname)
+    request.addParameter('lastname', TYPES.VarChar, payload.lastname)
+    request.addParameter('gender', TYPES.VarChar, payload.gender)
+    request.addParameter('dob', TYPES.Date, payload.dob)
+    request.addParameter('bio', TYPES.VarChar, payload.bio)
+    request.addParameter('id', TYPES.Int, id)
+
+    //request.on('row', (columns) => {
+        resolve("Profile has been updated")
+    //});
+    connection.execSql(request)})
+    
+}
+module.exports.idUpdate = idUpdate;
