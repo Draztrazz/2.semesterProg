@@ -116,7 +116,7 @@ function idDelete(id){
 }
 module.exports.idDelete = idDelete;
 
-function idUpdate(id){
+function idUpdate(id, payload){
     return new Promise((resolve, reject) => {
     const sql = 'UPDATE [users].[user] SET username =@username , email =@email, firstname =@firstname, lastname =@lastname, gender =@gender, dob =@dob, bio =@bio  WHERE id =@id'
     const request = new Request(sql, (err, rowCount) => {

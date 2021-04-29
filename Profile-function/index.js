@@ -68,7 +68,8 @@ async function deleteFunction(context, req){
 async function updateFunction(context, req){
     try{
        var id = await jwtController.authenticateToken(req)
-       let user = await db.idUpdate(id)
+       let payload = req.body
+       let user = await db.idUpdate(id, payload)
        console.log(user)
         context.res = {
             body: JSON.stringify(user)

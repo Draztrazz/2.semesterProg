@@ -1,5 +1,13 @@
 let jwt = localStorage.getItem("JWT");
 
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const dob = document.getElementById('dob');
+const firstname = document.getElementById('firstname');
+const lastname = document.getElementById('lastname');
+const gender = document.getElementById('gender');
+const bio = document.getElementById('bio');
+
 
 window.addEventListener("load", function(){
 
@@ -30,6 +38,7 @@ updateButton.addEventListener("click", function(){
     fetch(`http://localhost:7071/api/profile`, {
         method: "PUT",
         body: JSON.stringify({
+                id: jwt,
                 username: username.value,
                 email: email.value,
                 firstname: firstname.value,
