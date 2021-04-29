@@ -48,9 +48,9 @@ async function deleteFunction(context, req){
     try{
        var id = await jwtController.authenticateToken(req)
        let user = await db.idDelete(id)
-       console.log(id)
+       console.log(user)
         context.res = {
-            body: user
+            body: JSON.stringify(user)
             }
         }
     catch(error) {
