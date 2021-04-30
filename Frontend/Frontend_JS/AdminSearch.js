@@ -11,7 +11,7 @@ const bio = document.getElementById('bio');
 let adminSearchButton = document.getElementById("searchuser");
 
 
-
+//Retrieve information regarding a profile
 adminSearchButton.addEventListener("click", function(){
     let id1 = document.getElementById("searchinput").value;
     fetch(`http://localhost:7071/api/superior`, {
@@ -42,6 +42,8 @@ adminSearchButton.addEventListener("click", function(){
         })
 })
 
+
+//Update function
 let adminUpdateButton = document.getElementById("adminupdateuser");
 
 adminUpdateButton.addEventListener("click", function(){
@@ -67,11 +69,46 @@ adminUpdateButton.addEventListener("click", function(){
         )
         .then(function(data) {
             console.log(data)
-            
+            console.log("Profile has been updated")
+            location.href = '../Frontend_HTML/Adminpage.html'
         })
         .catch(function(err){
             console.log(err)
-            //location.href = '../Frontend_HTML/Frontpage.html'
+            
         })
 })
 
+// Admin delete function
+let deleteButton = document.getElementById("admindeleteuser");
+
+deleteButton.addEventListener("click", function(){
+        let id1 = document.getElementById("searchinput").value;
+
+        var txt;
+        var deleteUserBox = prompt("Please enter DELETE to delete the profile:",);
+        if (deleteUserBox == null || deleteUserBox == "") {
+            txt = "You have not deleted the profile";
+        } else if(deleteUserBox == "DELETE") {
+            fetch(`http://localhost:7071/api/superior`, {
+                method: "DELETE",
+                body: JSON.stringify({id: id1}),//nu piller vi ikke mere ved delete - det her virker måske. vi har ændret i jwt-controller
+                headers: {
+                    "Content-Type": "application/json; charset-UTF-8"
+                }
+            })
+            .then((resp) => resp.json()
+            )
+            .then(function(data) {
+                console.log(data)
+                console.log("Profile has been deleted")
+            location.href = '../Frontend_HTML/Adminpage.html'
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+            
+        }
+        document.getElementById("notDeletedAdmin").innerHTML = txt;
+
+
+})

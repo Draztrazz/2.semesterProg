@@ -30,6 +30,7 @@ module.exports = async function (context, req) {
     }
 }
 
+//Admin find all users 
 async function get(context){
     try{
         let userData = await db.showallUsers()
@@ -46,6 +47,7 @@ async function get(context){
     }
 }
 
+//Admin find user
 async function searchUser(context, req){
     try{
         var id = req.body.id
@@ -64,6 +66,7 @@ async function searchUser(context, req){
     }
 }
 
+//Admin update
 async function adminUpdate(context, req){
     try{
        var id = req.body.id
@@ -71,6 +74,26 @@ async function adminUpdate(context, req){
        let payload = req.body
        let user = await db.idUpdate(id, payload)
        console.log(user)
+        context.res = {
+            body: JSON.stringify(user)
+            }
+        }
+    catch(error) {
+        console.log("get error")
+        context.res = {
+            status: 400,
+            body: `Error - ${error.message}`
+        }
+    }
+}
+
+//Admin delete
+async function adminDelete(context, req){
+    try{
+        var id = req.body.id
+        console.log(id);
+        let user = await db.idDelete(id)
+        console.log(user)
         context.res = {
             body: JSON.stringify(user)
             }
