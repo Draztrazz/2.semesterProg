@@ -9,7 +9,8 @@
         "get",
         "put",
         "delete"
-      ]
+      ],
+      "route": "admininf"
     },
     {
       "type": "http",
