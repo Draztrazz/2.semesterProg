@@ -143,3 +143,23 @@ function idUpdate(id, payload){
     
 }
 module.exports.idUpdate = idUpdate;
+
+// admin functions 
+function showallUsers(){
+    return new Promise((resolve, reject) => {
+    const sql = 'SELECT COUNT(*) FROM [users].[user]'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount == 0) {
+            reject({message: 'Systems do not have any users'})}
+        }
+    );
+    request.on('row', (columns) => {
+        resolve(columns)
+    });
+    connection.execSql(request)})
+    
+}
+module.exports.idSelect = idSelect;
