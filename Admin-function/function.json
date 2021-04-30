@@ -10,7 +10,7 @@
         "put",
         "delete"
       ],
-      "route": "admininf"
+      "route": "superior"
     },
     {
       "type": "http",
