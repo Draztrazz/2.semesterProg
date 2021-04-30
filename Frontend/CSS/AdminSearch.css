@@ -1,35 +1,29 @@
-*{
-    box-sizing: border-box;
-}
-
 #main{
     background-image: url("../Images/scrolling-gradient.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    justify-content: center;
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-.search-box{
-    background-color: white;
-    border-radius: 5px;
-    width: 400px;
-    max-width: 100%;
-}
-
-.search-box h2{
-    text-align: center;
-}
-
-.search-box input{
-    border: 2px solid #f0f0f0;
-    border-radius: 4px;
-    display: block;
-    font-family: inherit;
-    font-size: 14px;
+#main{
+    margin: auto;
+    width: 50%;
     padding: 10px;
-    width: 100%;
+    text-align: center;
+  
+}
+
+.container{
+    background-color: whitesmoke;
+    opacity: 0.85;
+    border-radius: 5%;
+    padding-top: 0.5cm;
+    padding-right: 2cm;
+    padding-left: 2cm;
+    padding-bottom: 2cm;
+}
+
+#searchfield{
+    padding-left: 1.64cm;
 }
