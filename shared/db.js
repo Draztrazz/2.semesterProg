@@ -162,4 +162,4 @@ function showallUsers(){
     connection.execSql(request)})
     
 }
-module.exports.idSelect = idSelect;
+module.exports.showallUsers = showallUsers;

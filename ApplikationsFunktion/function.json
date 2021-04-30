@@ -9,7 +9,7 @@
         "get",
         "post"
       ],
-      "route": "signup"
+      "route": "admin"
     },
     {
       "type": "http",
