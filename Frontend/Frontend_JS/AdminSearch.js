@@ -27,6 +27,7 @@ adminSearchButton.addEventListener("click", function(){
     )
         .then(function(data) {
             console.log(data)
+            document.getElementById("IDretrieved").innerHTML = data[0].value
             document.getElementById("username").value = data[1].value
             document.getElementById("email").value = data[4].value
             document.getElementById("firstname").value = data[5].value
