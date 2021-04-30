@@ -11,7 +11,7 @@ module.exports = async function (context, req) {
     }
     switch(req.method){
         case 'GET':
-            await get(context);
+            await get(context, req);
             break;
         default:
             context.res = {
@@ -23,9 +23,9 @@ module.exports = async function (context, req) {
 
 async function get(context){
     try{
-        let user = await db.showallUsers()
+        let userData = await db.showallUsers()
         context.res = {
-            body: user
+            body: userData
             }
         }
     catch(error) {
