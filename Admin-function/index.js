@@ -48,12 +48,31 @@ async function get(context){
 
 async function searchUser(context, req){
     try{
-        console.log(req.body.id);
         var id = req.body.id
         let user = await db.idSelect(id)
         //console.log(user);
         context.res = {
             body: user
+            }
+        }
+    catch(error) {
+        console.log("get error")
+        context.res = {
+            status: 400,
+            body: `Error - ${error.message}`
+        }
+    }
+}
+
+async function adminUpdate(context, req){
+    try{
+       var id = req.body.id
+       console.log(id);
+       let payload = req.body
+       let user = await db.idUpdate(id, payload)
+       console.log(user)
+        context.res = {
+            body: JSON.stringify(user)
             }
         }
     catch(error) {

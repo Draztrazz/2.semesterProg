@@ -41,7 +41,7 @@ adminSearchButton.addEventListener("click", function(){
             //location.href = '../Frontend_HTML/Frontpage.html'
         })
 })
-/*
+
 let adminUpdateButton = document.getElementById("adminupdateuser");
 
 adminUpdateButton.addEventListener("click", function(){
@@ -49,7 +49,7 @@ adminUpdateButton.addEventListener("click", function(){
     fetch(`http://localhost:7071/api/superior`, {
         method: "PUT",
         body: JSON.stringify({
-                id: jwt,
+                id: id1,
                 username: username.value,
                 email: email.value,
                 firstname: firstname.value,
@@ -66,11 +66,11 @@ adminUpdateButton.addEventListener("click", function(){
         )
         .then(function(data) {
             console.log(data)
-            location.href = '../Frontend_HTML/Profilepage.html'
+            
         })
         .catch(function(err){
             console.log(err)
-            location.href = '../Frontend_HTML/Frontpage.html'
+            //location.href = '../Frontend_HTML/Frontpage.html'
         })
-})*/
+})
 
