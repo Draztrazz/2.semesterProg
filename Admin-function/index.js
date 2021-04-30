@@ -48,9 +48,9 @@ async function get(context){
 
 async function searchUser(context, req){
     try{
-        console.log(req.body);
+        console.log(req.body.id);
         var id = req.body.id
-        let user = await db.adminSearch(id)
+        let user = await db.idSelect(id)
         //console.log(user);
         context.res = {
             body: user

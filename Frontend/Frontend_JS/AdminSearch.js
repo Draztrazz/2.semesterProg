@@ -14,17 +14,10 @@ let id1 = document.getElementById("searchuser").value;
 
 adminSearchButton.addEventListener("click", function(){
 
-    fetch(`http://localhost:7071/api/superior?id=${id1}`, {
+    fetch(`http://localhost:7071/api/superior`, {
         method: "POST",
         body: JSON.stringify({
-            id: id1,
-            username: username.value,
-            email: email.value,
-            firstname: firstname.value,
-            lastname: lastname.value,
-            gender: gender.value,
-            dob: dob.value,
-            bio: bio.value
+            id: id1
     }),
     headers: {
         "Content-Type": "application/json; charset-UTF-8"
