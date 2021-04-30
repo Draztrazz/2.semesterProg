@@ -6,6 +6,11 @@ window.addEventListener('load', () => {
         )
         .then(function(data) {
             console.log(data);
+            if(data[3].value == true){
+                location.href = '../Frontend_HTML/Adminpage.html'
+            } else {
+                return false
+            }
         })
         .catch(function(err){
             console.log(err)

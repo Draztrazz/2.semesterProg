@@ -1,5 +1,6 @@
 const db = require('../shared/db');
 const jwtController = require('../Controller/JWTcontroller');
+const userController = require('../Controller/userActionController');
 
 
 module.exports = async function (context, req) {
@@ -27,8 +28,9 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        var id = await jwtController.authenticateToken(req)
+        let id = await jwtController.authenticateToken(req)
         let user = await db.idSelect(id)
+        //let userStatus = await userController.adminCheck()
         context.res = {
             body: user
             }
