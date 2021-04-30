@@ -13,6 +13,15 @@ module.exports = async function (context, req) {
         case 'GET':
             await get(context, req);
             break;
+        case 'POST':
+            await searchUser(context, req);
+            break;
+        case 'PUT':
+            await adminUpdate(context, req);
+            break;
+        case 'DELETE':
+            await adminDelete(context, req);
+            break;
         default:
             context.res = {
                 body: "Please get or post"
@@ -26,6 +35,23 @@ async function get(context){
         let userData = await db.showallUsers()
         context.res = {
             body: userData
+            }
+        }
+    catch(error) {
+        console.log("get error")
+        context.res = {
+            status: 400,
+            body: `Error - ${error.message}`
+        }
+    }
+}
+
+async function searchUser(context, req){
+    try{
+        var id = req.body.id
+        let user = await db.adminSearch(id)
+        context.res = {
+            body: user
             }
         }
     catch(error) {
