@@ -10,10 +10,10 @@ const bio = document.getElementById('bio');
 
 let adminSearchButton = document.getElementById("searchuser");
 
-let id1 = document.getElementById("searchuser").value;
+
 
 adminSearchButton.addEventListener("click", function(){
-
+    let id1 = document.getElementById("searchinput").value;
     fetch(`http://localhost:7071/api/superior`, {
         method: "POST",
         body: JSON.stringify({
