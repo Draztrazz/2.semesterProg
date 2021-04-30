@@ -164,6 +164,27 @@ function showallUsers(){
 }
 module.exports.showallUsers = showallUsers;
 
+function adminSearch(id){
+    return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM [users].[user] where id = @id'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount == 0) {
+            reject({message: 'User does not exist'})}
+        }
+    );
+    request.addParameter('id', TYPES.Int, id)
+
+    request.on('row', (columns) => {
+        resolve(columns)
+    });
+    connection.execSql(request)})
+    
+}
+module.exports.adminSearch = adminSearch;
+
 //select match
 function selectMatch(payload){
     return new Promise((resolve, reject) => {
@@ -193,3 +214,4 @@ function selectMatch(payload){
     });
 }
 module.exports.insert = insert;
+
