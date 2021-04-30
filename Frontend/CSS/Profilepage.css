@@ -1,4 +1,4 @@
-#main{
+.main{
     background-image: url("../Images/scrolling-gradient.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -6,7 +6,7 @@
     background-attachment: fixed;
 }
 
-#main{
+.main{
     margin: auto;
     width: 50%;
     border: 3px solid green;
