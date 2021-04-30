@@ -48,8 +48,10 @@ async function get(context){
 
 async function searchUser(context, req){
     try{
+        console.log(req.body);
         var id = req.body.id
         let user = await db.adminSearch(id)
+        //console.log(user);
         context.res = {
             body: user
             }
