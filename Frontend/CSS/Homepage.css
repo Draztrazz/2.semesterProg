@@ -5,3 +5,12 @@
     background-position: center center;
     background-attachment: fixed;
 }
+
+#topnav {
+    background-color: whitesmoke;
+    overflow: hidden;
+    opacity: 0.85;
+    border-radius: 5px;
+    padding: 1cm;
+  }
+  
