@@ -45,8 +45,9 @@ adminSearchButton.addEventListener("click", function(){
 let adminUpdateButton = document.getElementById("adminupdateuser");
 
 adminUpdateButton.addEventListener("click", function(){
-
+    let id1 = document.getElementById("searchinput").value;
     fetch(`http://localhost:7071/api/superior`, {
+        
         method: "PUT",
         body: JSON.stringify({
                 id: id1,
