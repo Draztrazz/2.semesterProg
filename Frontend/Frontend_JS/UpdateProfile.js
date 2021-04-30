@@ -55,11 +55,11 @@ updateButton.addEventListener("click", function(){
         )
         .then(function(data) {
             console.log(data)
-            location.href = '../Frontend_HTML/Profilepage.html'
+            //location.href = '../Frontend_HTML/Profilepage.html'
         })
         .catch(function(err){
             console.log(err)
-            location.href = '../Frontend_HTML/Frontpage.html'
+            /*location.href = '../Frontend_HTML/Frontpage.html'*/
         })
 })
 
