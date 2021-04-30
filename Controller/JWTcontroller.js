@@ -20,7 +20,8 @@ module.exports.generateToken = generateToken;
 module.exports.authenticateToken = authenticateToken*/
 
 async function authenticateToken(req){
-    const token = req.query.id || req.body
+    //console.log(req.body);
+    const token = req.query.id || req.body.id
     if (token == null){return res.sendStatus(401)}
 
     decoded = jwt.verify(token, 'secretkey')

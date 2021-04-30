@@ -1,10 +1,7 @@
 let jwt = localStorage.getItem("JWT");
 
 
-let getButton = document.getElementById("getuser");
-
-getButton.addEventListener("click", function(){
-
+window.addEventListener('load', ()=>{
     fetch(`http://localhost:7071/api/profile?id=${jwt}`)
         .then((resp) => resp.json()
         )
@@ -35,7 +32,7 @@ deleteButton.addEventListener("click", function(){
         } else if(deleteUserBox == "DELETE") {
             fetch(`http://localhost:7071/api/profile`, {
                 method: "DELETE",
-                body: JSON.stringify(jwt),
+                body: JSON.stringify({id: jwt}),//nu piller vi ikke mere ved delete - det her virker måske. vi har ændret i jwt-controller
                 headers: {
                     "Content-Type": "application/json; charset-UTF-8"
                 }
