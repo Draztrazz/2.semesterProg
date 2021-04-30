@@ -8,6 +8,7 @@ updateButton.addEventListener('click', () => {
         )
         .then(function(data) {
             console.log(data)
+            document.getElementById("userinfo").innerHTML = data
             console.log("You have succesfully retrieved all of the great users")
         })
         .catch(function(err){
