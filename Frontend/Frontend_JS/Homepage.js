@@ -18,3 +18,9 @@ window.addEventListener('load', () => {
         })
 })
 
+let updateButton = document.getElementById("logout");
+
+updateButton.addEventListener("click", function(){
+    localStorage.removeItem('JWT')
+    location.href = '../Frontend_HTML/Frontpage.html'
+})

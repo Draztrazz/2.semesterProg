@@ -11,7 +11,7 @@ window.addEventListener('load', ()=>{
             document.getElementById("email").innerHTML = data[4].value
             document.getElementById("firstname").innerHTML = data[5].value
             document.getElementById("lastname").innerHTML = data[6].value
-            document.getElementById("dob").innerHTML = data[8].value
+            document.getElementById("dob").innerHTML = data[8].value.substring(0,10)
             document.getElementById("gender").innerHTML = data[7].value
             document.getElementById("bio").innerHTML = data[9].value
         })
