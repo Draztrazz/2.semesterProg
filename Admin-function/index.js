@@ -52,7 +52,6 @@ async function searchUser(context, req){
     try{
         var id = req.body.id
         let user = await db.idSelect(id)
-        //console.log(user);
         context.res = {
             body: user
             }
@@ -70,10 +69,8 @@ async function searchUser(context, req){
 async function adminUpdate(context, req){
     try{
        var id = req.body.id
-       console.log(id);
        let payload = req.body
        let user = await db.idUpdate(id, payload)
-       console.log(user)
         context.res = {
             body: JSON.stringify(user)
             }
@@ -91,9 +88,7 @@ async function adminUpdate(context, req){
 async function adminDelete(context, req){
     try{
         var id = req.body.id
-        console.log(id);
         let user = await db.idDelete(id)
-        console.log(user)
         context.res = {
             body: JSON.stringify(user)
             }

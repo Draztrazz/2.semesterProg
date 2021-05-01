@@ -8,6 +8,13 @@ const lastname = document.getElementById('lastname');
 const gender = document.getElementById('gender');
 const bio = document.getElementById('bio');
 
+let adminUpdateButton = document.getElementById("adminupdateuser");
+
+adminUpdateButton.addEventListener('click', function(e) {
+    e.preventDefault()
+    checkInputs();
+})
+
 // check inputs
 function checkInputs(){
     let inputValidated = true;
@@ -52,9 +59,9 @@ function checkInputs(){
     /*if (bioValue == ''){
         bioValue = 'You have not yet written your own bio.'
     }*/
-
+    
     if(inputValidated == true){
-        postUser();
+        adminUpdateUser();
     } else {
         return false
     }
@@ -117,9 +124,8 @@ adminSearchButton.addEventListener("click", function(){
 
 
 //Update function
-let adminUpdateButton = document.getElementById("adminupdateuser");
 
-adminUpdateButton.addEventListener("click", function(){
+function adminUpdateUser(){
     let id1 = document.getElementById("searchinput").value;
     fetch(`http://localhost:7071/api/superior`, {
         
@@ -149,7 +155,9 @@ adminUpdateButton.addEventListener("click", function(){
             console.log(err)
             
         })
-})
+}
+
+
 
 // Admin delete function
 let deleteButton = document.getElementById("admindeleteuser");

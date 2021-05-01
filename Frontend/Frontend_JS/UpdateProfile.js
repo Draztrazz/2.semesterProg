@@ -8,6 +8,13 @@ const lastname = document.getElementById('lastname');
 const gender = document.getElementById('gender');
 const bio = document.getElementById('bio');
 
+let updateButton = document.getElementById("updateuser");
+
+updateButton.addEventListener('click', function(e) {
+    e.preventDefault()
+    checkInputs();
+})
+
 // check inputs
 function checkInputs(){
     let inputValidated = true;
@@ -52,9 +59,9 @@ function checkInputs(){
     /*if (bioValue == ''){
         bioValue = 'You have not yet written your own bio.'
     }*/
-
+    
     if(inputValidated == true){
-        postUser();
+        userUpdateProfile();
     } else {
         return false
     }
@@ -96,6 +103,7 @@ window.addEventListener("load", function(){
             document.getElementById("dob").value = data[8].value
             document.getElementById("gender").value = data[7].value
             document.getElementById("bio").value = data[9].value
+            
         })
         .catch(function(err){
             console.log(err)
@@ -104,9 +112,9 @@ window.addEventListener("load", function(){
 })
 
 
-let updateButton = document.getElementById("updateuser");
 
-updateButton.addEventListener("click", function(){
+
+function userUpdateProfile() {
 
     fetch(`http://localhost:7071/api/profile`, {
         method: "PUT",
@@ -128,11 +136,11 @@ updateButton.addEventListener("click", function(){
         )
         .then(function(data) {
             console.log(data)
-            //location.href = '../Frontend_HTML/Profilepage.html'
+            location.href = '../Frontend_HTML/Profilepage.html'
         })
         .catch(function(err){
             console.log(err)
             /*location.href = '../Frontend_HTML/Frontpage.html'*/
         })
-})
+}
 
