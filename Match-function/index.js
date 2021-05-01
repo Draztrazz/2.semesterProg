@@ -1,4 +1,5 @@
 const db = require('../shared/db');
+const jwtController = require('../Controller/JWTcontroller');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
@@ -22,11 +23,11 @@ module.exports = async function (context, req) {
             break
     }
 }
-/*
+
 async function get(context, req){
     try{
-        let username = req.query.username;
-        let user = await db.select(username)
+        let id = await jwtController.authenticateToken(req)
+        let user = await db.selectMatch(id)
         context.res = {
             body: user
         };
@@ -36,8 +37,9 @@ async function get(context, req){
             body: `No user - ${error.message}`
         }
     }
-}*/
+}
 
+/*
 async function post(context, req){
     try{
         var id = await jwtController.authenticateToken(req)
@@ -52,4 +54,4 @@ async function post(context, req){
             body: error.message
         }
     }
-}
+}*/
