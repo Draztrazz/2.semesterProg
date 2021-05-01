@@ -6,6 +6,15 @@
     <title>Admin search</title>
 </head>
 <body id="main">
+<<<<<<< HEAD
+=======
+    <div class="search-box">
+        <h2>Search for users - please use UserID</h2>
+        <input id="searchinput" type="text" placeholder="Search...">
+        <button type="button" id="searchuser">Search</button>
+        <br>
+    </div>
+>>>>>>> 96b7f0d2c593ca62d3a63828188aba12815542fb
     <div class="container">
         <div class="header1">
             <h2>Update or delete profile down-below</h2>
@@ -17,6 +26,10 @@
                 <button type="button" id="searchuser">Search</button>
             <br>
             </div>
+        </div>
+        <div class="user-info">
+            <label>ID:</label>
+            <p id="IDretrieved"></p>
         </div>
         <div class="user-info">
             <label>Username:</label>
@@ -55,7 +68,9 @@
         </div>
         <div>
             <button type="button" id="adminupdateuser">Update user</button>
-            <button type="button" id="admindeleteuser">Delete user</button>
+                <button type="button" id="admindeleteuser">Delete user</button>
+                <p id="notDeletedAdmin"></p>
+
         </div>
     </div>
     <script src="../Frontend_JS/AdminSearch.js"></script>
