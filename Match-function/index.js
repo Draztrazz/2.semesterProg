@@ -33,7 +33,10 @@ async function get(context, req){
         let user = await db.selectMatch(minAge, maxAge, gender, id)
         let matchUser = {
             Firstname: user[8].value,
-            Lastname: user[9].value
+            Lastname: user[9].value,
+            Age: user[11].value,
+            Gender: user[10].value,
+            Bio: user[12].value
         }
         context.res = {
             body: matchUser

@@ -52,12 +52,6 @@ function setSuccesFor(input) {
     formControl.className = 'form-control succes';
 }
 
-// calculate age
-function calculate_age(minAge, maxAge) {
-    var ageDif = Date.now() - new Date(minAge, maxAge).getTime();
-    var ageDate = new Date(ageDif);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-}
 
 
 function findUsers (){
@@ -71,11 +65,11 @@ function findUsers (){
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
-                document.getElementById("firstname").innerHTML = data[5].value
-                document.getElementById("lastname").innerHTML = data[6].value
-                document.getElementById("dob").innerHTML = data[8].value
-                document.getElementById("gender").innerHTML = data[7].value
-                document.getElementById("bio").innerHTML = data[9].value
+                document.getElementById("firstname").innerHTML = data[8].value
+                document.getElementById("lastname").innerHTML = data[9].value
+                document.getElementById("dob").innerHTML = data[11].value
+                document.getElementById("gender").innerHTML = data[10].value
+                document.getElementById("bio").innerHTML = data[12].value
             }) .catch((err) =>{
                 console.log(err)
             })
