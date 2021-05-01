@@ -173,12 +173,12 @@ function selectMatch(id){
             FROM (
                      SELECT *
                      FROM users.match
-                     WHERE users.match.id1 = '1'
+                     WHERE users.match.id1 = @id
                  ) as m
                      RIGHT OUTER JOIN users.[user] as u
                                       ON u.id = m.id2
             WHERE u.id <> m.id2
-               OR m.id1 IS NULL AND u.id <> '1'
+               OR m.id1 IS NULL AND u.id <> @id
         ) as t1
 ORDER BY NEWID()`
         const request = new Request(sql, (err) => {
