@@ -64,7 +64,7 @@ function findUsers (){
 
     const minAge1 = document.getElementById('minDob').value;
     const maxAge1 = document.getElementById('maxDob').value;
-    const gender1 = document.getElementById('gender'.value);
+    const gender1 = document.getElementById('gender').value;
 
 
     fetch(`http://localhost:7071/api/match?id=${jwt}&minAge=${minAge1}&maxAge=${maxAge1}&gender=${gender1}`)
