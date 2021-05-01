@@ -30,7 +30,7 @@ async function get(context, req){
         let username = req.query.username;
         let password = req.query.password;
         let user = await db.select(username, password)
-        await userController.loggedIn(user)
+        //await userController.loggedIn(user)
         let jwtToken = await jwtController.generateToken(user)
         context.res = {
             body: jwtToken
