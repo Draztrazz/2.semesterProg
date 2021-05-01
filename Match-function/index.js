@@ -31,8 +31,12 @@ async function get(context, req){
         let gender = req.query.gender
         let id = await jwtController.authenticateToken(req)
         let user = await db.selectMatch(minAge, maxAge, gender, id)
+        let matchUser = {
+            Firstname: user[8].value,
+            Lastname: user[9].value
+        }
         context.res = {
-            body: user
+            body: matchUser
         };
     } catch(error) {
         context.res = {
