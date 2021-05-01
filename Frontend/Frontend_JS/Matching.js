@@ -1,7 +1,7 @@
 let jwt = localStorage.getItem("JWT");
 
-const minAge = document.getElementById('minDob');
-const maxAge = document.getElementById('maxDob');
+const minAge = document.getElementById('minAge');
+const maxAge = document.getElementById('maxAge');
 const gender = document.getElementById('gender');
 
 let setPreferences = document.getElementById("setPreferences");
@@ -56,8 +56,8 @@ function setSuccesFor(input) {
 
 function findUsers (){
 
-    const minAge1 = document.getElementById('minDob').value;
-    const maxAge1 = document.getElementById('maxDob').value;
+    const minAge1 = document.getElementById('minAge').value;
+    const maxAge1 = document.getElementById('maxAge').value;
     const gender1 = document.getElementById('gender').value;
 
 

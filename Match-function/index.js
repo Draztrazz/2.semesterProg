@@ -30,11 +30,11 @@ async function get(context, req){
         let maxAge = req.query.maxAge
         let gender = req.query.gender
         let id = await jwtController.authenticateToken(req)
-        let user = await db.selectMatch(minAge, maxAge, gender, id)
+        let user = await db.selectMatch(id, minAge, maxAge, gender)
         let matchUser = {
             Firstname: user[8].value,
             Lastname: user[9].value,
-            Age: user[11].value,
+            Age: user[13].value,
             Gender: user[10].value,
             Bio: user[12].value
         }
@@ -44,7 +44,7 @@ async function get(context, req){
     } catch(error) {
         context.res = {
             status: 400,
-            body: `No user - ${error.message}`
+            body: `${error.message}`
         }
     }
 }

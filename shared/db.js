@@ -178,18 +178,19 @@ function selectMatch(id, minAge, maxAge, gender){
                      RIGHT OUTER JOIN users.[user] as u
                                       ON u.id = m.id2
             WHERE u.id <> m.id2
-               OR m.id1 IS NULL AND u.id <> @id
+               OR m.id1 IS NULL AND u.id <> @id AND @gender = gender AND age BETWEEN @minAge AND @maxAge
         ) as t1
 ORDER BY NEWID()`
-        const request = new Request(sql, (err) => {
+        const request = new Request(sql, (err, rowCount) => {
             if(err){
                 reject(err)
                 console.log(err)
-            }
+            } else if (rowCount == 0) {
+                reject({message: 'No more matches'})}
         });
         request.addParameter('id', TYPES.Int, id)
-        request.addParameter('minDob', TYPES.Date, minAge)
-        request.addParameter('maxDob', TYPES.Date, maxAge)
+        request.addParameter('minAge', TYPES.Int, minAge)
+        request.addParameter('maxAge', TYPES.Int, maxAge)
         request.addParameter('gender', TYPES.VarChar, gender)
 
         request.on('row', (columns) => {
