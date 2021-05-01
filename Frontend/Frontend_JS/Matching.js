@@ -2,7 +2,7 @@ let jwt = localStorage.getItem("JWT");
 
 const minAge = document.getElementById('minAge');
 const maxAge = document.getElementById('maxAge');
-const gender = document.getElementById('gender');
+const gender = document.getElementById('gender1');
 
 let setPreferences = document.getElementById("setPreferences");
 
@@ -21,7 +21,7 @@ function checkInputs(){
 
     if (dobValue1 && dobValue2 == '') {
         setErrorFor(minAge && maxAge, 'Date of birth cannot be blank.');
-    } else if (calculate_age(dobValue1) < 18) {
+    } else if (dobValue1 < 18) {
         setErrorFor(minAge, 'You must 18 or older to use this app.');
     } else {
         setSuccesFor(minAge && maxAge);
@@ -31,7 +31,7 @@ function checkInputs(){
     }*/
     
     if(inputValidated == true){
-        findUsersfu();
+        findUsers();
     } else {
         return false
     }
@@ -58,18 +58,18 @@ function findUsers (){
 
     const minAge1 = document.getElementById('minAge').value;
     const maxAge1 = document.getElementById('maxAge').value;
-    const gender1 = document.getElementById('gender').value;
+    const gender1 = document.getElementById('gender1').value;
 
 
     fetch(`http://localhost:7071/api/match?id=${jwt}&minAge=${minAge1}&maxAge=${maxAge1}&gender=${gender1}`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
-                document.getElementById("firstname").innerHTML = data[8].value
-                document.getElementById("lastname").innerHTML = data[9].value
-                document.getElementById("dob").innerHTML = data[11].value
-                document.getElementById("gender").innerHTML = data[10].value
-                document.getElementById("bio").innerHTML = data[12].value
+                document.getElementById("firstname").innerHTML = data.Firstname
+                document.getElementById("lastname").innerHTML = data.Lastname
+                document.getElementById("dob").innerHTML = data.Age
+                document.getElementById("gender2").innerHTML = data.Gender
+                document.getElementById("bio").innerHTML = data.Bio
             }) .catch((err) =>{
                 console.log(err)
             })
