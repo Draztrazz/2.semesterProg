@@ -166,7 +166,7 @@ module.exports.showallUsers = showallUsers;
 
 
 //select match
-function selectMatch(id){
+function selectMatch(id, minAge, maxAge, gender){
     return new Promise((resolve, reject) => {
         const sql = `SELECT TOP 1 * FROM (
             SELECT *
@@ -188,6 +188,9 @@ ORDER BY NEWID()`
             }
         });
         request.addParameter('id', TYPES.Int, id)
+        request.addParameter('minDob', TYPES.Date, minAge)
+        request.addParameter('maxDob', TYPES.Date, maxAge)
+        request.addParameter('gender', TYPES.VarChar, gender)
 
         request.on('row', (columns) => {
             resolve(columns)

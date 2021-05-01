@@ -26,8 +26,11 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
+        let minAge = req.query.minAge
+        let maxAge = req.query.maxAge
+        let gender = req.query.gender
         let id = await jwtController.authenticateToken(req)
-        let user = await db.selectMatch(id)
+        let user = await db.selectMatch(minAge, maxAge, gender, id)
         context.res = {
             body: user
         };
