@@ -155,7 +155,7 @@ function showallUsers(){
             reject(err)
             console.log(err)
         } else if (rowCount == 0) {
-            reject({message: 'Systems do not have any users'})}
+            reject({message: 'System does not have any users'})}
         }
     );
     request.on('row', (columns) => {
@@ -165,6 +165,26 @@ function showallUsers(){
     
 }
 module.exports.showallUsers = showallUsers;
+
+//show amount of matches
+function showMatches(){
+    return new Promise((resolve, reject) => {
+    const sql = 'SELECT COUNT(*) FROM [users].[matchTable]'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount == 0) {
+            reject({message: 'System does not have any matches'})}
+        }
+    );
+    request.on('row', (columns) => {
+        resolve(columns)
+    });
+    connection.execSql(request)})
+    
+}
+module.exports.showMatches = showMatches;
 
 
 //select match
