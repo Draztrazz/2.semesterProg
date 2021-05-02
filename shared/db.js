@@ -244,3 +244,22 @@ function determineMatch(id1, id2){
 }
 module.exports.determineMatch = determineMatch;
 
+function insertMatch(id1, id2){
+    return new Promise((resolve, reject) => {
+    const sql = 'INSERT INTO [users].[matchTable] (id1, id2) VALUES (@id1, @id2)'
+    const request = new Request(sql, (err) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        }
+    });
+    request.addParameter('id1', TYPES.Int, id1)
+    request.addParameter('id2', TYPES.Int, id2)
+    
+    request.on('requestCompleted', (row) => {
+        resolve('Match inserted', row)
+    })
+    connection.execSql(request)})
+    
+}
+module.exports.insertMatch = insertMatch;

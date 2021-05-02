@@ -28,7 +28,7 @@ module.exports.authenticateToken = authenticateToken*/
 
 async function authenticateToken(req){
     //console.log(req.body);
-    const token = req.query.id || req.body.id || req.body.id1 || reqId2.id2
+    const token = req.query.id || req.body.id || req.body.id1
     if (token == null){return res.sendStatus(401)}
 
     decoded = jwt.verify(token, 'secretkey')
