@@ -34,16 +34,9 @@ module.exports = async function (context, req) {
 async function get(context){
     try{
         let userData = await db.showallUsers()
-        let matchData = await db.showMatches()
         console.log(userData);
-        console.log(matchData);
-
-        let dataPayload = {
-            user: userData,
-            match: matchData
-        }
         context.res = {
-            body: dataPayload
+            body: userData
             }
         }
     catch(error) {
