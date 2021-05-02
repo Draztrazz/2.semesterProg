@@ -149,7 +149,7 @@ module.exports.idUpdate = idUpdate;
 // admin functions 
 function showallUsers(){
     return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM (SELECT COUNT(*) AS Users FROM [users].[user] UNION SELECT COUNT(*) AS Matches FROM [users].[matchTable]) AS total;'
+    const sql = 'SELECT(SELECT COUNT(*) FROM [users].[user]) AS users, (SELECT COUNT(*) FROM [users].[matchTable]) AS matches;'
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
