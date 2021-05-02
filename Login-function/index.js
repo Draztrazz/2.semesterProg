@@ -27,7 +27,6 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        db.ageUpdate(req.query.username)
         let username = req.query.username;
         let password = req.query.password;
         let user = await db.select(username, password)

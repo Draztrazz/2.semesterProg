@@ -29,6 +29,7 @@ module.exports = async function (context, req) {
 async function get(context, req){
     try{
         let id = await jwtController.authenticateToken(req)
+        db.ageUpdate(id)
         let user = await db.idSelect(id)
         //let userStatus = await userController.adminCheck()
         context.res = {
