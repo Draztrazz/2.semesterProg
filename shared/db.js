@@ -265,3 +265,25 @@ function insertMatch(id1, id2){
     
 }
 module.exports.insertMatch = insertMatch;
+
+function ageUpdate(username){
+    return new Promise((resolve, reject) => {
+    const sql = `UPDATE users.[user]
+    SET age = DATEDIFF(hour, users.[user].dob, GETDATE())/8766
+    WHERE username = @username`
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount == 0) {
+            reject({message: 'Cannot update profile - something went wrong'})}
+        }
+    );
+    request.addParameter('username', TYPES.VarChar, username)
+
+        resolve("Profile has been updated")
+
+    connection.execSql(request)})
+    
+}
+module.exports.ageUpdate = ageUpdate;
