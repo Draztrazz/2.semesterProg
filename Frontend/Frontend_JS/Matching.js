@@ -75,12 +75,13 @@ function findUsers(){
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
-                likedId = data.id
+
                 document.getElementById("firstname").innerHTML = data.Firstname
                 document.getElementById("lastname").innerHTML = data.Lastname
                 document.getElementById("dob").innerHTML = data.Age
                 document.getElementById("gender2").innerHTML = data.Gender
                 document.getElementById("bio").innerHTML = data.Bio
+                likedId = data.Id
             }) .catch((err) =>{
                 console.log(err)
             })
@@ -104,5 +105,6 @@ fetch('http://localhost:7071/api/match', {
                 findUsers()
             }) .catch((err) =>{
                 console.log(err)
+                findUsers()
             })
         }

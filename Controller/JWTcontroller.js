@@ -38,7 +38,7 @@ async function authenticateToken(req){
 module.exports.authenticateToken = authenticateToken
 
 async function authenticateOtherToken(req){
-    //console.log(req.body);
+    //console.log(req.body.id2);
     const token = req.body.id2
     if (token == null){return res.sendStatus(401)}
 

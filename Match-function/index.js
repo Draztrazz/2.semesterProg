@@ -68,9 +68,9 @@ async function post(context, req){
             body: {status: 'Match!'}
             }
     } catch(error) {
+        console.log(error.message)
         context.res = {
-            status: 400,
-            body: error.message
+            body: JSON.stringify(error.message)
         }
     }
 }
