@@ -61,7 +61,7 @@ async function post(context, req){
             userStatus: req.body.userStatus,
             id2: id2
         }
-        //await db.insertOpinion(payload)
+        await db.insertOpinion(payload)
         await db.determineMatch(id1, id2)
         await db.insertMatch(id1, id2)
         context.res = {
