@@ -1,4 +1,5 @@
 let jwt = localStorage.getItem("JWT");
+let likedId = 0;
 
 const minAge = document.getElementById('minAge');
 const maxAge = document.getElementById('maxAge');
@@ -6,10 +7,24 @@ const gender = document.getElementById('gender1');
 
 let setPreferences = document.getElementById("setPreferences");
 
+let likeButton = document.getElementById('likeButton');
+let dislikeButton = document.getElementById('dislikeButton');
 
 setPreferences.addEventListener('click', function(e) {
     e.preventDefault()
     checkInputs();
+})
+
+likeButton.addEventListener('click', function(e) {
+    e.preventDefault()
+    let opinion = likeButton.value
+    swipe(opinion)
+})
+
+dislikeButton.addEventListener('click', function(e) {
+    e.preventDefault()
+    let opinion = dislikeButton.value
+    swipe(opinion)
 })
 
 // check inputs
@@ -26,10 +41,6 @@ function checkInputs(){
     } else {
         setSuccesFor(minAge && maxAge);
     }
-    /*if (bioValue == ''){
-        bioValue = 'You have not yet written your own bio.'
-    }*/
-    
     if(inputValidated == true){
         findUsers();
     } else {
@@ -53,7 +64,6 @@ function setSuccesFor(input) {
 }
 
 
-
 function findUsers (){
 
     const minAge1 = document.getElementById('minAge').value;
@@ -65,6 +75,7 @@ function findUsers (){
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
+                likedId = data.id
                 document.getElementById("firstname").innerHTML = data.Firstname
                 document.getElementById("lastname").innerHTML = data.Lastname
                 document.getElementById("dob").innerHTML = data.Age
@@ -74,3 +85,23 @@ function findUsers (){
                 console.log(err)
             })
 }
+
+function swipe(opinion){
+fetch('http://localhost:7071/api/match', {
+        method: 'POST',
+            body: JSON.stringify({
+                id1: jwt,
+                userStatus: opinion,
+                id2: likedId
+            }),
+                headers: {
+                    "Content-Type": "application/json; charset-UTF-8"
+                }
+            })
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+            }) .catch((err) =>{
+                console.log(err)
+            })
+        }

@@ -31,7 +31,9 @@ async function get(context, req){
         let gender = req.query.gender
         let id = await jwtController.authenticateToken(req)
         let user = await db.selectMatch(id, minAge, maxAge, gender)
+        let otherUser = await jwtController.generateOtherToken(user)
         let matchUser = {
+            Id: otherUser,
             Firstname: user[8].value,
             Lastname: user[9].value,
             Age: user[13].value,
@@ -49,14 +51,20 @@ async function get(context, req){
     }
 }
 
-/*
+
 async function post(context, req){
     try{
-        var id = await jwtController.authenticateToken(req)
-        let payload = req.body;
-        await db.selectMatch(payload)
+        let id1 = await jwtController.authenticateToken(req)
+        let id2 = await jwtController.authenticateOtherToken(req)
+        let payload = {
+            id1: id1,
+            userStatus: req.body.userStatus,
+            id2: id2
+        }
+        await db.insertOpinion(payload)
+        await db.determineMatch(id1, id2)
         context.res = {
-            body: {status: 'Succes'}
+            body: {status: 'Match!'}
             }
     } catch(error) {
         context.res = {
@@ -64,4 +72,4 @@ async function post(context, req){
             body: error.message
         }
     }
-}*/
+}

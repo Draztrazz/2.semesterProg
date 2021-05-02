@@ -202,3 +202,45 @@ ORDER BY NEWID()`
 }
 module.exports.selectMatch = selectMatch;
 
+function insertOpinion(payload){
+    return new Promise((resolve, reject) => {
+    const sql = 'INSERT INTO [users].[match] (id1, status, id2) VALUES (@id1, @userStatus, @id2)'
+    const request = new Request(sql, (err) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        }
+    });
+    request.addParameter('id1', TYPES.Int, payload.id1)
+    request.addParameter('userStatus', TYPES.Bit, payload.userStatus)
+    request.addParameter('id2', TYPES.Int, payload.id2)
+    
+    request.on('requestCompleted', (row) => {
+        resolve('user inserted', row)
+    })
+    connection.execSql(request)})
+    
+}
+module.exports.insertOpinion = insertOpinion;
+
+function determineMatch(id1, id2){
+    return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM users.match WHERE status = 1 AND (id1 = @id1 AND id2 = @id2 OR id1 = @id2 AND id2 = @id1)'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount != 2) {
+            reject({message: 'No match'})}
+        }
+    );
+    request.addParameter('id1', TYPES.Int, id1)
+    request.addParameter('id2', TYPES.Int, id2)
+
+    request.on('requestCompleted', (row) => {
+        resolve('Succes', row)
+    });
+    connection.execSql(request)})   
+}
+module.exports.determineMatch = determineMatch;
+
