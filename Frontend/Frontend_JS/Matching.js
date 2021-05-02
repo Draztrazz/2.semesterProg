@@ -64,7 +64,7 @@ function setSuccesFor(input) {
 }
 
 
-function findUsers (){
+function findUsers(){
 
     const minAge1 = document.getElementById('minAge').value;
     const maxAge1 = document.getElementById('maxAge').value;
@@ -101,6 +101,7 @@ fetch('http://localhost:7071/api/match', {
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
+                findUsers()
             }) .catch((err) =>{
                 console.log(err)
             })
