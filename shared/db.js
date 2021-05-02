@@ -23,9 +23,10 @@ module.exports.sqlConnection = connection;
 module.exports.startDB = startDB;
 
 function insert(payload){
+    console.log(payload.dob)
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO [users].[user] (username, password, admin, email, firstname, lastname, gender, dob, bio, age)
-        VALUES (@username, @password, @admin, @email, @firstname, @lastname, @gender, @dob, @bio, DATEDIFF(hour, '@dob', GETDATE())/8766))`
+        VALUES (@username, @password, @admin, @email, @firstname, @lastname, @gender, @dob, @bio, DATEDIFF(hour, @dob, GETDATE())/8766)`
         const request = new Request(sql, (err) => {
             if(err){
                 reject(err)
