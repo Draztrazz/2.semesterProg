@@ -33,7 +33,7 @@ module.exports = async function (context, req) {
 //Admin find all users 
 async function get(context){
     try{
-        let userData = await db.showallUsers()
+        let userData = await db.showallStats()
         console.log(userData);
         context.res = {
             body: userData

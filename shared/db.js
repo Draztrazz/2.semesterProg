@@ -194,7 +194,7 @@ module.exports.showallStats = showallStats;
 //select match
 // denne funktion bruges til at finde potentielle matches
 // vi benytter os af id, minAge, maxAge og gender, som parametre
-//
+// id bruges til at finde den user, der leder efter matches, mens minAge, maxAge og gender er vores søgekriterier
 function selectMatch(id, minAge, maxAge, gender){
     return new Promise((resolve, reject) => {
         const sql = `SELECT TOP 1 * FROM (
@@ -229,8 +229,10 @@ ORDER BY NEWID()`
 
     });
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.selectMatch = selectMatch;
 
+// dette er vores like og dislike funktion, hvor vi indsætter like eller dislike ind i vores match tabel
 function insertOpinion(payload){
     return new Promise((resolve, reject) => {
     const sql = 'INSERT INTO [users].[match] (id1, status, id2) VALUES (@id1, @userStatus, @id2)'
@@ -244,37 +246,45 @@ function insertOpinion(payload){
     request.addParameter('userStatus', TYPES.Bit, payload.userStatus)
     request.addParameter('id2', TYPES.Int, payload.id2)
     
+    // hvis det lykkes, sender vi den kode afsted
     request.on('requestCompleted', (row) => {
         resolve('user inserted', row)
     })
     connection.execSql(request)})
     
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.insertOpinion = insertOpinion;
 
+// denne funktion bruges til at vurdere om to brugere har et match
 function determineMatch(id1, id2){
     return new Promise((resolve, reject) => {
+        // her tjekker vi vores match tabel om de pågældende id-parametre er at finde samt status = 1
     const sql = 'SELECT * FROM users.match WHERE status = 1 AND (id1 = @id1 AND id2 = @id2 OR id1 = @id2 AND id2 = @id1)'
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
             console.log(err)
+            // hvis der ikke er to brugere, der har liket hinanden - altså to rækker i tabellen, får vi en fejl
         } else if (rowCount != 2) {
             reject({message: 'No match'})}
         }
     );
     request.addParameter('id1', TYPES.Int, id1)
     request.addParameter('id2', TYPES.Int, id2)
-
+        // denne kode eksekveres, hvis der er succes og to brugere, der har liket hinanden
     request.on('requestCompleted', (row) => {
         resolve('Succes', row)
     });
     connection.execSql(request)})   
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.determineMatch = determineMatch;
 
+// hvis der er tale om et match, indsættes dette i vores matchTable. Dette udfører nedenstående funktion
 function insertMatch(id1, id2){
     return new Promise((resolve, reject) => {
+        // her hentes id fra de to pågældende brugere, der matcher
     const sql = 'INSERT INTO [users].[matchTable] (id1, id2) VALUES (@id1, @id2)'
     const request = new Request(sql, (err) => {
          if(err){
@@ -284,15 +294,18 @@ function insertMatch(id1, id2){
     });
     request.addParameter('id1', TYPES.Int, id1)
     request.addParameter('id2', TYPES.Int, id2)
-    
+    // lykkes ovenstående, ekseveres nedenstående
     request.on('requestCompleted', (row) => {
         resolve('Match inserted', row)
     })
     connection.execSql(request)})
     
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.insertMatch = insertMatch;
 
+// her anvender vi en funktion, der opdaterer alderen for brugerne, som anvender systemet, ud fra dob-parameteren
+// her tjekker vi ved hjælp af vores username for at finde brugeren i databasen
 function ageUpdate(username){
     return new Promise((resolve, reject) => {
     const sql = `UPDATE users.[user]
@@ -302,6 +315,7 @@ function ageUpdate(username){
          if(err){
             reject(err)
             console.log(err)
+            // hvis der ikke er nogen rækker, får vi nedenstående fejl, idet der ikke er nogen brugere så
         } else if (rowCount == 0) {
             reject({message: 'Cannot update profile - something went wrong'})}
         }
@@ -313,4 +327,5 @@ function ageUpdate(username){
     connection.execSql(request)})
     
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.ageUpdate = ageUpdate;
