@@ -1,3 +1,4 @@
+// vi henter de elementer fra html, der anvendes til at oprette en bruger i systemet
 const form = document.getElementById('form');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
@@ -8,14 +9,18 @@ const lastname = document.getElementById('lastname');
 const gender = document.getElementById('gender');
 const bio = document.getElementById('bio');
 
+// ud fra ovenstående elementer, igangsættes denne addEventListener, når man trykker submit for at oprette en bruger
+// herefter køres en funktion, der validerer om informationerne efterlever vores kriterier
 form.addEventListener('submit', function(e) {
     e.preventDefault()
     checkInputs();
 })
 
+// denne funktion validerer inputs
 function checkInputs(){
     let inputValidated = true;
 
+    // vi finder den indtastede værdi fra inputfelterne i html
     const usernameValue = username.value;
     const passwordValue = password.value;
     const emailValue = email.value;
@@ -63,6 +68,7 @@ function checkInputs(){
         bioValue = 'You have not yet written your own bio.'
     }*/
 
+    // hvis validering er succesfuld, så igangsættes nedenstående funktion
     if(inputValidated == true){
         postUser();
     } else {
@@ -70,6 +76,7 @@ function checkInputs(){
     }
 }
 
+// denne funktion håndterer fejlbeskeder
 function setErrorFor(input, message) {
     const formControl = input.parentElement;
     const small = formControl.querySelector('small')
@@ -85,6 +92,7 @@ function setSuccesFor(input) {
     formControl.className = 'form-control succes';
 }
 
+// funktionen her, anvender vi POST-operation til at oprette en bruger i databasen, når valideringen er succesfuld
 function postUser(){
     fetch('http://localhost:7071/api/signup', {
         method: 'POST',
@@ -102,6 +110,7 @@ function postUser(){
                     "Content-Type": "application/json; charset-UTF-8"
                 }
             })
+            // hvis oprettelsen er succesfuld, kører nedenstående, hvorefter man får en besked om at skulle logge ind for at komme i gang
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
@@ -113,7 +122,9 @@ function postUser(){
                 console.log(err)
             })
 }
-
+// calculate age
+// her beregner vi alderen, og gemmer den som en int
+// getTime finder milisekunder
 function calculate_age(dob) {
     var ageDif = Date.now() - new Date(dob).getTime();
     var ageDate = new Date(ageDif);
