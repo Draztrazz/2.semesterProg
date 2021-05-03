@@ -1,10 +1,13 @@
+// vi henter information fra vores frontend, der skal anvendes i vores loginform, således at brugere kan tilgå systemet
 const form = document.getElementById('loginform');
 const username = document.getElementById('username')
 const password = document.getElementById('password')
 
+// nedestående eventListener igangsættes, når en bruger forsøger at logge ind
 form.addEventListener('submit', function(e) {
     e.preventDefault()
 
+    // vi henter værdien fra inputfelterne, som bruges til at logge ind
     let username1 = document.getElementById('username').value
     let password1 = document.getElementById('password').value
 
@@ -15,11 +18,13 @@ form.addEventListener('submit', function(e) {
                 return
             }*/
         )
+        // hvis det er en succes, sættes en JWT og brugeren tilgår homepage
         .then(function(data) {
             console.log(data);
             localStorage.setItem("JWT", data);
             location.href = '../Frontend_HTML/Homepage.html';
         })
+        // er det en fejl, kastes nedenstående fejlbesked
         .catch(function(err){
             console.log(err)
             alert('Either username or password is incorrect.')

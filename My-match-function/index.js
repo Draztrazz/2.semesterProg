@@ -26,22 +26,22 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        let minAge = req.query.minAge
-        let maxAge = req.query.maxAge
-        let gender = req.query.gender
-        let id = await jwtController.authenticateToken(req)
-        let user = await db.selectMatch(id, minAge, maxAge, gender)
-        let otherUser = await jwtController.generateOtherToken(user)
-        let matchUser = {
-            Id: otherUser,
-            Firstname: user[8].value,
-            Lastname: user[9].value,
-            Age: user[13].value,
-            Gender: user[10].value,
-            Bio: user[12].value
+        let loggedId = await jwtController.authenticateToken(req)
+        let matches = await db.showMatches(loggedId)
+        console.log(matches)
+        let matchArray = []
+        for(let i=0; i<matches.length; i++){
+            if(matches[i].value != loggedId){
+                let chosenFirstname = await db.idSelect(matches[i].value)
+                let chosenMatch = {
+                    id: matches[i].value,
+                    firstname: chosenFirstname.firstname
+                }
+                matchArray.push(chosenMatch)
+            }
         }
         context.res = {
-            body: matchUser
+            body: "what"
         };
     } catch(error) {
         context.res = {
@@ -54,16 +54,7 @@ async function get(context, req){
 
 async function post(context, req){
     try{
-        let id1 = await jwtController.authenticateToken(req)
-        let id2 = await jwtController.authenticateOtherToken(req)
-        let payload = {
-            id1: id1,
-            userStatus: req.body.userStatus,
-            id2: id2
-        }
-        await db.insertOpinion(payload)
-        await db.determineMatch(id1, id2)
-        await db.insertMatch(id1, id2)
+        
         context.res = {
             body: {status: 'Match!'}
             }

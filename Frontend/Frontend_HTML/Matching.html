@@ -6,17 +6,34 @@
     <title>Matching</title>
 </head>
 <body>
+    <a href="../Frontend_HTML/Homepage.html">Return homepage</a>
     <div class="container">
         <div class="header1">
             <h1>My profile</h1>
         </div>
         <div class="user-info">
-            <label>Username:</label>
-            <p id="username"></p>
+            <h3>Search preferences</h3>
+            <label>Min age:</label>
+            <br>
+            <input type="number" id="minAge">
+            <br>
+            <label>Max age:</label>
+            <br>
+            <input type="number" id="maxAge">
+            <br>
+            <label>Gender</label>
+            <br>
+            <select>
+                <option id="gender1">Male</option>
+                <option id="gender1">Female</option>
+                <option id="gender1">Other</option>
+            </select>
+            <br>
+            <br>
+            <button type="button" id="setPreferences">Search</button>
         </div>
         <div class="user-info">
-            <label>E-mail:</label>
-            <p id="email"></p>
+            <h3>Potential match</h3>
         </div>
         <div class="user-info">
             <label>First name:</label>
@@ -32,11 +49,18 @@
         </div>
         <div class="user-info">
             <label>Gender:</label>
-            <p id="gender"></p>
+            <p id="gender2"></p>
         </div>
         <div class="user-info">
             <label>Bio:</label>
             <p id="bio"></p>
+        </div>
+        <div>
+            <button type="button" id="likeButton" value="1">Like</button>
+        </div>
+        <br>
+        <div>
+            <button type="button" id="dislikeButton" value="0">Dislike</button>
         </div>
 <script src="../Frontend_JS/Matching.js"></script>
 </body>
