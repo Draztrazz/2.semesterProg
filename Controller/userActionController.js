@@ -1,5 +1,8 @@
+// her tillader vi, at vi kan anvende de klasser vi har oprettet i Classes-mappen
 const classes = require('../Classes/userClasses')
 
+// vi definerer to variable, således at vi kan anvende disse nedenfor
+// dette er med henblik på at vurdere hvorvidt der er tale om en admin eller normal bruger, der logger ind
 let loggedUser = 0;
 let adminUser = 0;
 
