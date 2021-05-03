@@ -1,8 +1,11 @@
+// vi anvender tedious-modulet fra NPM
 const {Connection, Request, TYPES} = require('tedious');
 const config = require('./config.json');
 
 var connection = new Connection(config)
 
+
+// denne funktion vurderer om der er forbindelse til databasen
 function startDB(){
     return new Promise((resolve, reject) => {
         connection.on('connect', (err) => {
@@ -18,13 +21,16 @@ function startDB(){
         connection.connect();
     })
 }
-
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.sqlConnection = connection;
 module.exports.startDB = startDB;
 
+// dette er vores funktion til at oprette en bruger i systemet
+// vores input-parameter dækker over de informationer vi ønsker at sende til databasen
 function insert(payload){
     console.log(payload.dob)
     return new Promise((resolve, reject) => {
+        // vores query beregner endvidere datoen som en int ud fra vores dob-parameter
         const sql = `INSERT INTO [users].[user] (username, password, admin, email, firstname, lastname, gender, dob, bio, age)
         VALUES (@username, @password, @admin, @email, @firstname, @lastname, @gender, @dob, @bio, DATEDIFF(hour, @dob, GETDATE())/8766)`
         const request = new Request(sql, (err) => {
@@ -43,6 +49,7 @@ function insert(payload){
         request.addParameter('dob', TYPES.Date, payload.dob)
         request.addParameter('bio', TYPES.VarChar, payload.bio)
 
+        // hvis det er en succes, printer vi nedenstående for at vise, at vi har fået en bruger mere i vores db
         request.on('requestCompleted', (row) => {
             console.log('User inserted', row);
             resolve('user inserted', row)
@@ -51,11 +58,13 @@ function insert(payload){
 
     });
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.insert = insert;
 
-
+// dette er vores login funktion, som identificerer den pågældende bruger ud fra følgende to parametre: username og password
 function select(username, password){
     return new Promise((resolve, reject) => {
+        // her tjekker vi om inputs matcher med data vi har gemt i vores database
     const sql = 'SELECT * FROM [users].[user] where username = @username AND password = @password'
     const request = new Request(sql, (err, rowCount) => {
          if(err){
@@ -74,7 +83,9 @@ function select(username, password){
     connection.execSql(request)})
     
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.select = select;
+
 
 function idSelect(id){
     return new Promise((resolve, reject) => {
@@ -95,15 +106,19 @@ function idSelect(id){
     connection.execSql(request)})
     
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.idSelect = idSelect;
 
+// nedenstående er vores funktion, der bruges til at slette en profil
 function idDelete(id){
     return new Promise((resolve, reject) => {
+        // vi har anvendt id som parameter, når vi skal finde brugeren i databasen som vi ønsker at slette
     const sql = 'DELETE FROM [users].[user] where id = @id'
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
             console.log(err)
+            // hvis der ikke er nogen brugere med det pågældende id, printer vi en fejl, da vi hermed ikke kan slette en bruger
         } else if (rowCount == 0) {
             reject({message: 'Cannot delete profile - something went wrong'})}
         }
@@ -116,15 +131,19 @@ function idDelete(id){
     connection.execSql(request)})
     
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.idDelete = idDelete;
 
+// denne funktion bruger vi til at opdatere en user
 function idUpdate(id, payload){
     return new Promise((resolve, reject) => {
+        // vi anvender id til at finde den bruger, som vi ønsker at opdatere
     const sql = 'UPDATE [users].[user] SET username =@username , email =@email, firstname =@firstname, lastname =@lastname, gender =@gender, dob =@dob, bio =@bio  WHERE id =@id'
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
             console.log(err)
+             // hvis der ikke er nogen brugere med det pågældende id, printer vi en fejl, da vi hermed ikke kan opdatere en bruger
         } else if (rowCount == 0) {
             reject({message: 'Cannot update profile - something went wrong'})}
         }
@@ -144,18 +163,22 @@ function idUpdate(id, payload){
     connection.execSql(request)})
     
 }
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.idUpdate = idUpdate;
 
 // admin functions 
-function showallUsers(){
+// denne funktion henter alle antallet af brugere og matches, der er i systemet
+function showallStats(){
     return new Promise((resolve, reject) => {
+        // her tæller vi antallet af rækker i hver tabel for at finde ud af, hvor mange brugere og matches der er
     const sql = 'SELECT(SELECT COUNT(*) FROM [users].[user]) AS users, (SELECT COUNT(*) FROM [users].[matchTable]) AS matches;'
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
             console.log(err)
+            // hvis ikke der er nogen rækker, får vi denne fejlbesked
         } else if (rowCount == 0) {
-            reject({message: 'System does not have any users'})}
+            reject({message: 'System does not have any users nor matches'})}
         }
     );
     request.on('row', (columns) => {
@@ -164,30 +187,14 @@ function showallUsers(){
     connection.execSql(request)})
     
 }
-module.exports.showallUsers = showallUsers;
-/*
-//show amount of matches
-function showMatches(){
-    return new Promise((resolve, reject) => {
-    const sql = 'SELECT COUNT(*) FROM [users].[matchTable]'
-    const request = new Request(sql, (err, rowCount) => {
-         if(err){
-            reject(err)
-            console.log(err)
-        } else if (rowCount == 0) {
-            reject({message: 'System does not have any matches'})}
-        }
-    );
-    request.on('row', (columns) => {
-        resolve(columns)
-    });
-    connection.execSql(request)})
-    
-}
-module.exports.showMatches = showMatches;
-*/
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
+module.exports.showallStats = showallStats;
+
 
 //select match
+// denne funktion bruges til at finde potentielle matches
+// vi benytter os af id, minAge, maxAge og gender, som parametre
+//
 function selectMatch(id, minAge, maxAge, gender){
     return new Promise((resolve, reject) => {
         const sql = `SELECT TOP 1 * FROM (
