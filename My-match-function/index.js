@@ -28,20 +28,9 @@ async function get(context, req){
     try{
         let loggedId = await jwtController.authenticateToken(req)
         let matches = await db.showMatches(loggedId)
-        console.log(matches)
-        let matchArray = []
-        for(let i=0; i<matches.length; i++){
-            if(matches[i].value != loggedId){
-                let chosenFirstname = await db.idSelect(matches[i].value)
-                let chosenMatch = {
-                    id: matches[i].value,
-                    firstname: chosenFirstname.firstname
-                }
-                matchArray.push(chosenMatch)
-            }
-        }
+        //console.log(matches)
         context.res = {
-            body: "what"
+            body: matches
         };
     } catch(error) {
         context.res = {

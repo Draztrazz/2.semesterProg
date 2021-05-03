@@ -334,7 +334,14 @@ module.exports.ageUpdate = ageUpdate;
 
 function showMatches(id){
     return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM users.[matchTable] WHERE id1 = @id OR id2 = @id'
+    const sql = `SELECT * FROM (
+                            SELECT *
+                            FROM users.matchTable
+                            WHERE id1 = @id OR id2 = @id
+                        ) as m
+                    INNER JOIN users.[user] as u
+                    ON m.id1 = u.id OR m.id2 = u.id
+                    WHERE u.id <> @id`
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
@@ -347,6 +354,7 @@ function showMatches(id){
     request.addParameter('id', TYPES.Int, id)
 
     request.on('row', (columns) => {
+        console.log(columns)
         resolve(columns)
     });
     connection.execSql(request)})
@@ -354,3 +362,5 @@ function showMatches(id){
 }
 // her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.showMatches = showMatches;
+
+//'SELECT * FROM ( SELECT * FROM users.matchTable WHERE id1 = @id OR id2 = @id ) as m INNER JOIN users.[user] as u ON m.id1 = u.id OR m.id2 = u.id WHERE u.id <> @id'
