@@ -29,8 +29,18 @@ async function get(context, req){
         let loggedId = await jwtController.authenticateToken(req)
         let matches = await db.showMatches(loggedId)
         //console.log(matches)
+        let matchedArray = []
+        for(let i=0; i<matches.length;i++){
+                let matchedUser = {
+                    username: matches[i][3].value,
+                    firstname: matches[i][4].value,
+                    lastname: matches[i][5].value
+                }
+            matchedArray.push(matchedUser)
+        }
+        console.log(matchedArray)
         context.res = {
-            body: matches
+            body: matchedArray
         };
     } catch(error) {
         context.res = {
