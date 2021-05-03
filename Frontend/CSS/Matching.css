@@ -1,0 +1,25 @@
+.main{
+    background-image: url("../Images/scrolling-gradient.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.main{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+  
+}
+
+.container{
+    background-color: whitesmoke;
+    opacity: 0.85;
+    border-radius: 5%;
+    padding-top: 0.5cm;
+    padding-right: 2cm;
+    padding-left: 2cm;
+    padding-bottom: 2cm;
+}
