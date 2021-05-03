@@ -102,6 +102,7 @@ fetch('http://localhost:7071/api/match', {
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
+                alert("You've got a match!")
                 findUsers()
             }) .catch((err) =>{
                 console.log(err)
