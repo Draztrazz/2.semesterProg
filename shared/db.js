@@ -329,3 +329,26 @@ function ageUpdate(username){
 }
 // her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.ageUpdate = ageUpdate;
+
+function showMatches(id){
+    return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM users.[matchTable] WHERE id1 = @id OR id2 = @id'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+            // hvis ikke der er nogen rækker, får vi denne fejlbesked
+        } else if (rowCount == 0) {
+            reject({message: 'System does not have any matches'})}
+        }
+    );
+    request.addParameter('id', TYPES.Int, id)
+
+    request.on('row', (columns) => {
+        resolve(columns)
+    });
+    connection.execSql(request)})
+    
+}
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
+module.exports.showMatches = showMatches;
