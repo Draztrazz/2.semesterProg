@@ -9,6 +9,7 @@
     },
     "options": {
         "encrypt": true,
-        "database": "Dating"
+        "database": "Dating",
+        "rowCollectionOnRequestCompletion": true
     }
 }

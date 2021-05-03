@@ -334,7 +334,7 @@ module.exports.ageUpdate = ageUpdate;
 
 function showMatches(id){
     return new Promise((resolve, reject) => {
-    const sql = `SELECT * FROM (
+    const sql = `SELECT m.id1, m.id2, u.id, u.username, u.firstname, u.lastname FROM (
                             SELECT *
                             FROM users.matchTable
                             WHERE id1 = @id OR id2 = @id
@@ -342,23 +342,20 @@ function showMatches(id){
                     INNER JOIN users.[user] as u
                     ON m.id1 = u.id OR m.id2 = u.id
                     WHERE u.id <> @id`
-    const request = new Request(sql, (err, rowCount) => {
+    const request = new Request(sql, (err, rowCount, rows) => {
          if(err){
             reject(err)
             console.log(err)
             // hvis ikke der er nogen rækker, får vi denne fejlbesked
         } else if (rowCount == 0) {
-            reject({message: 'System does not have any matches'})}
+            reject({message: 'System does not have any matches'})
+        } else {
+            resolve(rows)
         }
-    );
+    });
     request.addParameter('id', TYPES.Int, id)
 
-    request.on('row', (columns) => {
-        console.log(columns)
-        resolve(columns)
-    });
     connection.execSql(request)})
-    
 }
 // her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.showMatches = showMatches;
