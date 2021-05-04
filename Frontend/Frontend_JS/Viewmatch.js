@@ -19,7 +19,7 @@ fetch(`http://localhost:7071/api/mymatch`, {
         document.getElementById("age").innerHTML = data.age
         document.getElementById("gender").innerHTML = data.gender
         document.getElementById("bio").innerHTML = data.bio
-        localStorage.clearItem('viewedMatch')
+        localStorage.removeItem('viewedMatch')
     })
     .catch(function(err){
         console.log(err)

@@ -1,5 +1,5 @@
 let jwt = localStorage.getItem("JWT");
-let matchedArray = [];
+//let matchedArray = [];
 
 /*window.addEventListener('load', () => {
 var box = document.createElement('div')
@@ -41,13 +41,13 @@ fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
             tag2.appendChild(text2);
             var button = document.createElement('button');
             var text3 = document.createTextNode('Delete');
-            button.setAttribute('id', 'deleteMatch');
+            button.setAttribute('class', 'deleteMatch');
             button.setAttribute('type', 'button');
             button.setAttribute('value', data[i].id);
             button.appendChild(text3);
             var button2 = document.createElement('button');
             var text4 = document.createTextNode('View match');
-            button2.setAttribute('id', 'viewMatch');
+            button2.setAttribute('class', 'viewMatch');
             button2.setAttribute('type', 'button');
             button2.setAttribute('value', data[i].id);
             button2.appendChild(text4);
@@ -57,9 +57,8 @@ fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
             box.appendChild(tag2);
             box.appendChild(button);
             box.appendChild(button2);
-            matchedArray.push(data[i].id);
+            //matchedArray.push(data[i].id);
         }
-        console.log(matchedArray)
         deleteButton();
         viewButton();
     })
@@ -69,38 +68,41 @@ fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
 
 
 function deleteButton(){
-    let deleteMatchButton = document.getElementById("deleteMatch");
-    deleteMatchButton.addEventListener("click", function(){
-        if (confirm('Are you sure you want to delete this match?')) {
-            fetch(`http://localhost:7071/api/mymatch`, {
-                method: "DELETE",
-                body: JSON.stringify({
-                    id1: jwt,
-                    id2: deleteMatchButton.value
-                }),
-                headers: {
-                    "Content-Type": "application/json; charset-UTF-8"
-                }
-                })
-                .then((resp) => resp.json()
-                )
-                .then(function(data) {
-                    console.log(data)
-                })
-                .catch(function(err){
-                    console.log(err)
-                })
-        } else {
-            console.log('Match not deleted')
-        }
-    })
+    let deleteMatchButton = document.getElementsByClassName("deleteMatch");
+    for(let i = 0; i < deleteMatchButton.length; i++){
+        deleteMatchButton[i].addEventListener("click", function(){
+            if (confirm('Are you sure you want to delete this match?')) {
+                fetch(`http://localhost:7071/api/mymatch`, {
+                    method: "DELETE",
+                    body: JSON.stringify({
+                        id1: jwt,
+                        id2: deleteMatchButton[i].value
+                    }),
+                    headers: {
+                        "Content-Type": "application/json; charset-UTF-8"
+                    }
+                    })
+                    .then((resp) => resp.json()
+                    )
+                    .then(function(data) {
+                        console.log(data);
+                        location.reload();
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+            } else {
+                console.log('Match not deleted')
+            }
+        })
+    };
 }
 
 function viewButton(){
-    let viewButton = document.getElementById('viewMatch');
-    viewButton.addEventListener('click', function(){
-        console.log(viewButton.value)
-        localStorage.setItem('viewedMatch', viewButton.value)
+    let viewButton = document.getElementsByClassName('viewMatch');
+    for(let i = 0; i < viewButton.length; i++){
+    viewButton[i].addEventListener('click', function(){
+        localStorage.setItem('viewedMatch', viewButton[i].value)
         location.href = '../Frontend_HTML/Viewmatch.html'
         /*fetch(`http://localhost:7071/api/mymatch`, {
             method: "POST",
@@ -118,4 +120,5 @@ function viewButton(){
                 console.log(err)
             })*/
         })
+    }
 }

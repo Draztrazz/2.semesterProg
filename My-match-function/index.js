@@ -31,7 +31,6 @@ async function get(context, req){
     try{
         let loggedId = await jwtController.authenticateToken(req)
         let matches = await db.showMatches(loggedId)
-        //console.log(matches)
         let matchedArray = []
         for(let i=0; i<matches.length;i++){
                 let matchedUser = {
@@ -41,7 +40,7 @@ async function get(context, req){
                 }
             matchedArray.push(matchedUser)
         }
-        console.log(matchedArray)
+        //console.log(matchedArray)
         context.res = {
             body: matchedArray
         };
@@ -85,7 +84,7 @@ async function deleteFunction(context, req){
        //await db.deleteMatch(id1, id2);
        //await db.deleteLikes(id1, id2);
         context.res = {
-            body: {status: 'Worked'}
+            body: {status: 'Succes'}
             }
         }
     catch(error) {
