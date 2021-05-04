@@ -1,5 +1,21 @@
 let jwt = localStorage.getItem("JWT");
 
+fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+        .then((resp) => resp.json()
+        )
+        .then(function(data) {
+            console.log(data);
+            if(data[3].value == true){
+                return true
+            } else {
+                location.href = '../Frontend_HTML/Frontpage.html'
+            }
+        })
+        .catch(function(err){
+            console.log(err)
+            location.href = '../Frontend_HTML/Frontpage.html'
+        })
+
 // vi bruger getElementById til at hente data fra inputfelter i relation til update og visning af brugere
 const username = document.getElementById("username");
 const email = document.getElementById("email");

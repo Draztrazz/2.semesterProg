@@ -1,4 +1,19 @@
 let matchedUser = localStorage.getItem("viewedMatch");
+let jwt = localStorage.getItem("JWT");
+
+
+fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+    .then((resp) => resp.json()
+    )
+    .then(function(data) {
+        console.log(data);
+        return true
+    })
+    .catch(function(err){
+        console.log(err)
+        location.href = '../Frontend_HTML/Frontpage.html'
+    });
+
 
 fetch(`http://localhost:7071/api/mymatch`, {
     method: "POST",

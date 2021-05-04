@@ -1,6 +1,18 @@
 let jwt = localStorage.getItem("JWT");
 let likedId = 0;
 
+fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+    .then((resp) => resp.json()
+    )
+    .then(function(data) {
+        console.log(data);
+        return true
+    })
+    .catch(function(err){
+        console.log(err)
+        location.href = '../Frontend_HTML/Frontpage.html'
+    });
+
 const minAge = document.getElementById('minAge');
 const maxAge = document.getElementById('maxAge');
 const gender = document.getElementById('gender1');

@@ -1,29 +1,19 @@
 let jwt = localStorage.getItem("JWT");
 //let matchedArray = [];
 
-/*window.addEventListener('load', () => {
-var box = document.createElement('div')
-box.setAttribute('id', 'small-container')
-var tag = document.createElement('label');
-var text = document.createTextNode('Match:');
-tag.appendChild(text);
-var tag2 = document.createElement('p')
-var text2 = document.createTextNode('Yup')
-tag2.appendChild(text2)
-var button = document.createElement('button')
-var text3 = document.createTextNode('Delete')
-button.setAttribute('value', testValue)
-button.appendChild(text3)
-var button2 = document.createElement('button')
-var text4 = document.createTextNode('View match')
-button2.appendChild(text4)
-var element = document.getElementById('container')
-element.appendChild(box)
-box.appendChild(tag);
-box.appendChild(tag2)
-box.appendChild(button)
-box.appendChild(button2)
-})*/
+fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+    .then((resp) => resp.json()
+    )
+    .then(function(data) {
+        console.log(data);
+        return true
+    })
+    .catch(function(err){
+        console.log(err)
+        location.href = '../Frontend_HTML/Frontpage.html'
+    });
+
+
 
 fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
     .then((resp) => resp.json()
