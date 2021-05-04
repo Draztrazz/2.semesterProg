@@ -159,9 +159,9 @@ function idUpdate(id, payload){
     request.addParameter('bio', TYPES.VarChar, payload.bio)
     request.addParameter('id', TYPES.Int, id)
 
-    //request.on('row', (columns) => {
+    request.on('requestCompleted', function() {
         resolve("Profile has been updated")
-    //});
+    });
     connection.execSql(request)})
     
 }

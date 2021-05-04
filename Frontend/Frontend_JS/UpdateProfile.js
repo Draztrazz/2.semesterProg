@@ -154,7 +154,6 @@ function userUpdateProfile() {
         })
         .catch(function(err){
             console.log(err)
-            /*location.href = '../Frontend_HTML/Frontpage.html'*/
         })
 }
 
