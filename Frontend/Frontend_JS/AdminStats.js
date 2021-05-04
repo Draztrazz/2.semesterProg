@@ -1,10 +1,10 @@
 let jwt = localStorage.getItem("JWT");
 
 // vi anvender getElementById for at henvise til den knap, der igangsætter vores nedenstående fetch funktion
-let showAllUsers = document.getElementById("showusers");
+let showAllStats = document.getElementById("showstats");
 
 // dette er vores addEventListener, der igangsættes, når man trykker på knappen, som vi henviser til ovenfor
-showAllUsers.addEventListener('click', () => {
+showAllStats.addEventListener('click', () => {
     fetch(`http://localhost:7071/api/superior`)
         .then((resp) => resp.json()
         )
