@@ -80,9 +80,8 @@ async function deleteFunction(context, req){
     try{
        let id1 = await jwtController.authenticateToken(req);
        let id2 = await jwtController.authenticateOtherToken(req);
-       console.log(id1, id2)
-       //await db.deleteMatch(id1, id2);
-       //await db.deleteLikes(id1, id2);
+       await db.deleteMatch(id1, id2);
+       await db.deleteLikes(id1, id2);
         context.res = {
             body: {status: 'Succes'}
             }

@@ -376,9 +376,9 @@ function deleteMatch(id1, id2){
     request.addParameter('id1', TYPES.Int, id1)
     request.addParameter('id2', TYPES.Int, id2)
 
-    //request.on('row', (columns) => {
+    request.on('requestCompleted', function() {
         resolve("Match has been deleted")
-    //});
+    });
     connection.execSql(request)})
 }
 // her bruger vi module.exports til at kalde funktionen i andre js-filer
@@ -398,9 +398,9 @@ function deleteLikes(id1, id2){
     request.addParameter('id1', TYPES.Int, id1)
     request.addParameter('id2', TYPES.Int, id2)
 
-    //request.on('row', (columns) => {
+    request.on('requestCompleted', function() {
         resolve("Likes has been deleted")
-    //});
+    });
     connection.execSql(request)})
 }
 // her bruger vi module.exports til at kalde funktionen i andre js-filer
