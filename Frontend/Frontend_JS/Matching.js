@@ -80,7 +80,7 @@ function findUsers(){
 
     const minAge1 = document.getElementById('minAge').value;
     const maxAge1 = document.getElementById('maxAge').value;
-    const gender1 = document.getElementById('gender1').value;
+    const gender1 = gender.options[gender.selectedIndex].value
 
 
     fetch(`http://localhost:7071/api/match?id=${jwt}&minAge=${minAge1}&maxAge=${maxAge1}&gender=${gender1}`)
