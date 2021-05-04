@@ -1,25 +1,24 @@
 let jwt = localStorage.getItem("JWT");
 //let matchedArray = [];
 
+window.addEventListener('load', () => {
+async function fetchAwait(){
 fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
     .then((resp) => resp.json()
     )
     .then(function(data) {
         console.log(data);
-        return true
     })
     .catch(function(err){
         console.log(err)
-        location.href = '../Frontend_HTML/Frontpage.html'
+        //location.href = '../Frontend_HTML/Frontpage.html'
     });
-
 
 
 fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
     .then((resp) => resp.json()
     )
     .then(function(data) {
-        //console.log(data.length);
         for(let i=0; i<data.length;i++){
             var box = document.createElement('div');
             box.setAttribute('id', 'small-container');
@@ -54,8 +53,11 @@ fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
     })
     .catch(function(err){
         console.log(err)
+        alert("You've got no current matches.")
     })
-
+}
+fetchAwait();
+})
 
 function deleteButton(){
     let deleteMatchButton = document.getElementsByClassName("deleteMatch");

@@ -348,7 +348,7 @@ function showMatches(id){
             console.log(err)
             // hvis ikke der er nogen rækker, får vi denne fejlbesked
         } else if (rowCount == 0) {
-            reject({message: 'System does not have any matches'})
+            reject({message: 'User does not have any matches'})
         } else {
             resolve(rows)
         }

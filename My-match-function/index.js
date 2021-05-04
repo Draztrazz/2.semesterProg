@@ -45,9 +45,10 @@ async function get(context, req){
             body: matchedArray
         };
     } catch(error) {
+        console.log(error)
         context.res = {
             status: 400,
-            body: `${error.message}`
+            body: error.message
         }
     }
 }
