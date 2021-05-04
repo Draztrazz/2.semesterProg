@@ -56,9 +56,17 @@ async function get(context, req){
 
 async function post(context, req){
     try{
-        
+        let viewedMatchId = await jwtController.authenticateToken(req)
+        let matchedUser = await db.idSelect(viewedMatchId)
+        let matchedUserInfo = {
+            firstname: matchedUser[5].value,
+            lastname: matchedUser[6].value,
+            gender: matchedUser[7].value,
+            age: matchedUser[10].value,
+            bio: matchedUser[9].value
+        }
         context.res = {
-            body: {status: 'Match!'}
+            body: matchedUserInfo
             }
     } catch(error) {
         console.log(error.message)
@@ -74,8 +82,8 @@ async function deleteFunction(context, req){
        let id1 = await jwtController.authenticateToken(req);
        let id2 = await jwtController.authenticateOtherToken(req);
        console.log(id1, id2)
-       await db.deleteMatch(id1, id2);
-       await db.deleteLikes(id1, id2);
+       //await db.deleteMatch(id1, id2);
+       //await db.deleteLikes(id1, id2);
         context.res = {
             body: {status: 'Worked'}
             }

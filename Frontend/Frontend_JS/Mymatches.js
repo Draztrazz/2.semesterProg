@@ -49,7 +49,7 @@ fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
             var text4 = document.createTextNode('View match');
             button2.setAttribute('id', 'viewMatch');
             button2.setAttribute('type', 'button');
-            button2.setAttribute('value', data[i].username);
+            button2.setAttribute('value', data[i].id);
             button2.appendChild(text4);
             var element = document.getElementById('container');
             element.appendChild(box);
@@ -101,6 +101,7 @@ function viewButton(){
     viewButton.addEventListener('click', function(){
         console.log(viewButton.value)
         localStorage.setItem('viewedMatch', viewButton.value)
+        location.href = '../Frontend_HTML/Viewmatch.html'
         /*fetch(`http://localhost:7071/api/mymatch`, {
             method: "POST",
             body: JSON.stringify({id: jwt}),
