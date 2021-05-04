@@ -1,5 +1,5 @@
 let jwt = localStorage.getItem("JWT");
-let matchedArray = 0;
+let matchedArray = [];
 
 /*window.addEventListener('load', () => {
 var box = document.createElement('div')
@@ -11,40 +11,110 @@ var tag2 = document.createElement('p')
 var text2 = document.createTextNode('Yup')
 tag2.appendChild(text2)
 var button = document.createElement('button')
-var text3 = document.createTextNode('View match')
+var text3 = document.createTextNode('Delete')
+button.setAttribute('value', testValue)
 button.appendChild(text3)
+var button2 = document.createElement('button')
+var text4 = document.createTextNode('View match')
+button2.appendChild(text4)
 var element = document.getElementById('container')
 element.appendChild(box)
 box.appendChild(tag);
 box.appendChild(tag2)
 box.appendChild(button)
+box.appendChild(button2)
 })*/
 
-    fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
-        .then((resp) => resp.json()
-        )
-        .then(function(data) {
-            console.log(data.length);
-            for(let i=0; i<data.length;i++){
-                var box = document.createElement('div')
-                box.setAttribute('id', 'small-container')
-                var tag = document.createElement('label');
-                var text = document.createTextNode('Match:');
-                tag.appendChild(text);
-                var tag2 = document.createElement('p')
-                var text2 = document.createTextNode(data[i].firstname +' '+ data[i].lastname)
-                tag2.appendChild(text2)
-                var button = document.createElement('button')
-                var text3 = document.createTextNode('View match')
-                button.appendChild(text3)
-                var element = document.getElementById('container')
-                element.appendChild(box)
-                box.appendChild(tag);
-                box.appendChild(tag2)
-                box.appendChild(button)
-            }
-        })
-        .catch(function(err){
-            console.log(err)
-        })
+fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
+    .then((resp) => resp.json()
+    )
+    .then(function(data) {
+        //console.log(data.length);
+        for(let i=0; i<data.length;i++){
+            var box = document.createElement('div');
+            box.setAttribute('id', 'small-container');
+            var tag = document.createElement('label');
+            var text = document.createTextNode('Match:');
+            tag.appendChild(text);
+            var tag2 = document.createElement('p');
+            var text2 = document.createTextNode(data[i].firstname +' '+ data[i].lastname);
+            tag2.appendChild(text2);
+            var button = document.createElement('button');
+            var text3 = document.createTextNode('Delete');
+            button.setAttribute('id', 'deleteMatch');
+            button.setAttribute('type', 'button');
+            button.setAttribute('value', data[i].id);
+            button.appendChild(text3);
+            var button2 = document.createElement('button');
+            var text4 = document.createTextNode('View match');
+            button2.setAttribute('id', 'viewMatch');
+            button2.setAttribute('type', 'button');
+            button2.setAttribute('value', data[i].username);
+            button2.appendChild(text4);
+            var element = document.getElementById('container');
+            element.appendChild(box);
+            box.appendChild(tag);
+            box.appendChild(tag2);
+            box.appendChild(button);
+            box.appendChild(button2);
+            matchedArray.push(data[i].id);
+        }
+        console.log(matchedArray)
+        deleteButton();
+        viewButton();
+    })
+    .catch(function(err){
+        console.log(err)
+    })
 
+
+function deleteButton(){
+    let deleteMatchButton = document.getElementById("deleteMatch");
+    deleteMatchButton.addEventListener("click", function(){
+        if (confirm('Are you sure you want to delete this match?')) {
+            fetch(`http://localhost:7071/api/mymatch`, {
+                method: "DELETE",
+                body: JSON.stringify({
+                    id1: jwt,
+                    id2: deleteMatchButton.value
+                }),
+                headers: {
+                    "Content-Type": "application/json; charset-UTF-8"
+                }
+                })
+                .then((resp) => resp.json()
+                )
+                .then(function(data) {
+                    console.log(data)
+                })
+                .catch(function(err){
+                    console.log(err)
+                })
+        } else {
+            console.log('Match not deleted')
+        }
+    })
+}
+
+function viewButton(){
+    let viewButton = document.getElementById('viewMatch');
+    viewButton.addEventListener('click', function(){
+        console.log(viewButton.value)
+        localStorage.setItem('viewedMatch', viewButton.value)
+        /*fetch(`http://localhost:7071/api/mymatch`, {
+            method: "POST",
+            body: JSON.stringify({id: jwt}),
+            headers: {
+                "Content-Type": "application/json; charset-UTF-8"
+            }
+            })
+            .then((resp) => resp.json()
+            )
+            .then(function(data) {
+                console.log(data)
+            })
+            .catch(function(err){
+                console.log(err)
+            })*/
+        })
+}

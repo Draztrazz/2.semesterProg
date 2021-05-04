@@ -11,7 +11,7 @@ module.exports.generateToken = generateToken;
 
 // denne funktion laber en jwt-token ud fra den bruger, som logger ind i systemet
 async function generateOtherToken(user){
-    let realToken = jwt.sign({user: user[3].value}, 'secretkey'
+    let realToken = jwt.sign({user: user}, 'secretkey'
     )
     return realToken
 }

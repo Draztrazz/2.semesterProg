@@ -43,6 +43,7 @@
 
 #small-container button{
     float: right;
+    margin-left: 10px;
 }
 
 /*#small-container p{

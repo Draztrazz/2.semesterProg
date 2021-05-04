@@ -16,6 +16,9 @@ module.exports = async function (context, req) {
         case 'POST':
             await post(context, req);
             break
+        case 'DELETE':
+            await deleteFunction(context, req);
+            break
         default:
             context.res = {
                 body: "Please get or post"
@@ -32,7 +35,7 @@ async function get(context, req){
         let matchedArray = []
         for(let i=0; i<matches.length;i++){
                 let matchedUser = {
-                    username: matches[i][3].value,
+                    id: await jwtController.generateOtherToken(matches[i][2].value),
                     firstname: matches[i][4].value,
                     lastname: matches[i][5].value
                 }
@@ -61,6 +64,27 @@ async function post(context, req){
         console.log(error.message)
         context.res = {
             body: JSON.stringify(error.message)
+        }
+    }
+}
+
+
+async function deleteFunction(context, req){
+    try{
+       let id1 = await jwtController.authenticateToken(req);
+       let id2 = await jwtController.authenticateOtherToken(req);
+       console.log(id1, id2)
+       await db.deleteMatch(id1, id2);
+       await db.deleteLikes(id1, id2);
+        context.res = {
+            body: {status: 'Worked'}
+            }
+        }
+    catch(error) {
+        console.log("get error")
+        context.res = {
+            status: 400,
+            body: `Error - ${error.message}`
         }
     }
 }
