@@ -47,8 +47,7 @@ async function get(context, req){
     } catch(error) {
         console.log(error)
         context.res = {
-            status: 400,
-            body: error.message
+            body: `${error.message}`
         }
     }
 }
@@ -71,7 +70,7 @@ async function post(context, req){
     } catch(error) {
         console.log(error.message)
         context.res = {
-            body: JSON.stringify(error.message)
+            body: `${error.message}`
         }
     }
 }
