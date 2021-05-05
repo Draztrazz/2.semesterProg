@@ -2,6 +2,21 @@
 const form = document.getElementById('loginform');
 const username = document.getElementById('username')
 const password = document.getElementById('password')
+let jwt = localStorage.getItem("JWT");
+
+window.addEventListener('load', () => {
+    fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+        .then((resp) => resp.json()
+        )
+        .then(function(data) {
+            // hvis der findes en eksisterende jwt-token, er forbrugeren logget ind og redirectes dermed til homepage for brugeren
+            console.log(data);
+            location.href = '../Frontend_HTML/Homepage.html'
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+})
 
 // nedestående eventListener igangsættes, når en bruger forsøger at logge ind
 form.addEventListener('submit', function(e) {
