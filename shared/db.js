@@ -65,9 +65,11 @@ module.exports.insert = insert;
 function select(username, password){
     return new Promise((resolve, reject) => {
         // her tjekker vi om inputs matcher med data vi har gemt i vores database
-    const sql = `UPDATE users.[user]
-    SET age = DATEDIFF(hour, users.[user].dob, GETDATE())/8766
-    SELECT * FROM [users].[user] where username = @username AND password = @password`
+        const sql = `SELECT * FROM [users].[user]
+        where username = @username AND password = @password
+        UPDATE users.[user]
+        SET age = DATEDIFF(hour, users.[user].dob, GETDATE())/8766
+        where username = @nikoline123 AND password = @password`
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
