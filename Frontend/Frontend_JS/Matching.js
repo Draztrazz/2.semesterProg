@@ -96,6 +96,8 @@ function findUsers(){
                 likedId = data.Id
             }) .catch((err) =>{
                 console.log(err)
+                alert('There are no more people to view. Try again later.')
+                location.href = '../Frontend_HTML/Homepage.html'
             })
 }
 
