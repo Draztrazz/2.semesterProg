@@ -106,9 +106,9 @@ async function adminDelete(context, req){
           // vi requester id for at finde den bruger, der ønskes slettet af admin-brugeren
         var id = req.body.id
         // vi bruger id som parameter i vores idDelete-funktion fra DB
-        let user = await db.idDelete(id)
+        let message = await db.idDelete(id)
         context.res = {
-            body: JSON.stringify(user)
+            body: JSON.stringify(message)
             }
         }
           // hvis der opstår en fejl, printes nedenstående

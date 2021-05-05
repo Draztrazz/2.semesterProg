@@ -65,9 +65,11 @@ module.exports.insert = insert;
 function select(username, password){
     return new Promise((resolve, reject) => {
         // her tjekker vi om inputs matcher med data vi har gemt i vores database
-    const sql = `UPDATE users.[user]
-    SET age = DATEDIFF(hour, users.[user].dob, GETDATE())/8766
-    SELECT * FROM [users].[user] where username = @username AND password = @password`
+        const sql = `SELECT * FROM [users].[user]
+        where username = @username AND password = @password
+        UPDATE users.[user]
+        SET age = DATEDIFF(hour, users.[user].dob, GETDATE())/8766
+        where username = @username AND password = @password`
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
@@ -159,9 +161,9 @@ function idUpdate(id, payload){
     request.addParameter('bio', TYPES.VarChar, payload.bio)
     request.addParameter('id', TYPES.Int, id)
 
-    //request.on('row', (columns) => {
+    request.on('requestCompleted', function() {
         resolve("Profile has been updated")
-    //});
+    });
     connection.execSql(request)})
     
 }
@@ -334,23 +336,74 @@ module.exports.ageUpdate = ageUpdate;
 
 function showMatches(id){
     return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM users.[matchTable] WHERE id1 = @id OR id2 = @id'
-    const request = new Request(sql, (err, rowCount) => {
+    const sql = `SELECT m.id1, m.id2, u.id, u.username, u.firstname, u.lastname FROM (
+                            SELECT *
+                            FROM users.matchTable
+                            WHERE id1 = @id OR id2 = @id
+                        ) as m
+                    INNER JOIN users.[user] as u
+                    ON m.id1 = u.id OR m.id2 = u.id
+                    WHERE u.id <> @id`
+    const request = new Request(sql, (err, rowCount, rows) => {
          if(err){
             reject(err)
             console.log(err)
             // hvis ikke der er nogen rækker, får vi denne fejlbesked
         } else if (rowCount == 0) {
-            reject({message: 'System does not have any matches'})}
+            reject({message: 'User does not have any matches'})
+        } else {
+            resolve(rows)
         }
-    );
+    });
     request.addParameter('id', TYPES.Int, id)
 
-    request.on('row', (columns) => {
-        resolve(columns)
-    });
     connection.execSql(request)})
-    
 }
 // her bruger vi module.exports til at kalde funktionen i andre js-filer
 module.exports.showMatches = showMatches;
+
+//'SELECT * FROM ( SELECT * FROM users.matchTable WHERE id1 = @id OR id2 = @id ) as m INNER JOIN users.[user] as u ON m.id1 = u.id OR m.id2 = u.id WHERE u.id <> @id'
+
+function deleteMatch(id1, id2){
+    return new Promise((resolve, reject) => {
+    const sql = 'DELETE FROM [users].[matchTable] WHERE id1 = @id1 AND id2 = @id2 OR id1 = @id2 AND id2 = @id1'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount == 0) {
+            reject({message: 'Cannot delete match - something went wrong'})}
+        }
+    );
+    request.addParameter('id1', TYPES.Int, id1)
+    request.addParameter('id2', TYPES.Int, id2)
+
+    request.on('requestCompleted', function() {
+        resolve("Match has been deleted")
+    });
+    connection.execSql(request)})
+}
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
+module.exports.deleteMatch = deleteMatch;
+
+function deleteLikes(id1, id2){
+    return new Promise((resolve, reject) => {
+    const sql = 'DELETE FROM [users].[match] WHERE id1 = @id1 AND id2 = @id2 OR id1 = @id2 AND id2 = @id1'
+    const request = new Request(sql, (err, rowCount) => {
+         if(err){
+            reject(err)
+            console.log(err)
+        } else if (rowCount == 0) {
+            reject({message: 'Cannot delete likes - something went wrong'})}
+        }
+    );
+    request.addParameter('id1', TYPES.Int, id1)
+    request.addParameter('id2', TYPES.Int, id2)
+
+    request.on('requestCompleted', function() {
+        resolve("Likes has been deleted")
+    });
+    connection.execSql(request)})
+}
+// her bruger vi module.exports til at kalde funktionen i andre js-filer
+module.exports.deleteLikes = deleteLikes;

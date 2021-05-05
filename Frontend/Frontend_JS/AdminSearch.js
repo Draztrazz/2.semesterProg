@@ -1,5 +1,21 @@
 let jwt = localStorage.getItem("JWT");
 
+fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+        .then((resp) => resp.json()
+        )
+        .then(function(data) {
+            console.log(data);
+            if(data[3].value == true){
+                return true
+            } else {
+                location.href = '../Frontend_HTML/Frontpage.html'
+            }
+        })
+        .catch(function(err){
+            console.log(err)
+            location.href = '../Frontend_HTML/Frontpage.html'
+        })
+
 // vi bruger getElementById til at hente data fra inputfelter i relation til update og visning af brugere
 const username = document.getElementById("username");
 const email = document.getElementById("email");
@@ -185,7 +201,7 @@ deleteButton.addEventListener("click", function(){
         // det ses, at funktionen virker ved at man skriver DELETE for at slette en bruger. Dette skal stå i en inputboks, der kommer frem, når man trykker på ovenstående knap
         var deleteUserBox = prompt("Please enter DELETE to delete the profile:",);
         // hvis der ikke er noget input eller lignende, sker der ikke noget - profilen slettes ikke
-        if (deleteUserBox == null || deleteUserBox == "") {
+        if (deleteUserBox != 'DELETE') {
             txt = "You have not deleted the profile";
             // hvis inputtet er rigtigt (DELETE), så igangsættes vores fetch, der sletter en bruger ud fra brugerid
         } else if(deleteUserBox == "DELETE") {

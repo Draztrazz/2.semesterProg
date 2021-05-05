@@ -16,6 +16,9 @@ module.exports = async function (context, req) {
         case 'POST':
             await post(context, req);
             break
+        case 'DELETE':
+            await deleteFunction(context, req);
+            break
         default:
             context.res = {
                 body: "Please get or post"
@@ -28,23 +31,22 @@ async function get(context, req){
     try{
         let loggedId = await jwtController.authenticateToken(req)
         let matches = await db.showMatches(loggedId)
-        console.log(matches)
-        let matchArray = []
-        for(let i=0; i<matches.length; i++){
-            if(matches[i].value != loggedId){
-                let chosenFirstname = await db.idSelect(matches[i].value)
-                let chosenMatch = {
-                    id: matches[i].value,
-                    firstname: chosenFirstname.firstname
+        let matchedArray = []
+        for(let i=0; i<matches.length;i++){
+                let matchedUser = {
+                    id: await jwtController.generateOtherToken(matches[i][2].value),
+                    firstname: matches[i][4].value,
+                    lastname: matches[i][5].value
                 }
-                matchArray.push(chosenMatch)
-            }
+            matchedArray.push(matchedUser)
         }
+        //console.log(matchedArray)
         context.res = {
-            body: "what"
+            body: matchedArray
         };
     } catch(error) {
-        context.res = {
+        console.log(error)
+        context.error = {
             status: 400,
             body: `${error.message}`
         }
@@ -54,14 +56,43 @@ async function get(context, req){
 
 async function post(context, req){
     try{
-        
+        let viewedMatchId = await jwtController.authenticateToken(req)
+        let matchedUser = await db.idSelect(viewedMatchId)
+        let matchedUserInfo = {
+            firstname: matchedUser[5].value,
+            lastname: matchedUser[6].value,
+            gender: matchedUser[7].value,
+            age: matchedUser[10].value,
+            bio: matchedUser[9].value
+        }
         context.res = {
-            body: {status: 'Match!'}
+            body: matchedUserInfo
             }
     } catch(error) {
         console.log(error.message)
         context.res = {
-            body: JSON.stringify(error.message)
+            status: 400,
+            body: `${error.message}`
+        }
+    }
+}
+
+
+async function deleteFunction(context, req){
+    try{
+       let id1 = await jwtController.authenticateToken(req);
+       let id2 = await jwtController.authenticateOtherToken(req);
+       await db.deleteMatch(id1, id2);
+       await db.deleteLikes(id1, id2);
+        context.res = {
+            body: {status: 'Succes'}
+            }
+        }
+    catch(error) {
+        console.log("get error")
+        context.res = {
+            status: 400,
+            body: `Error - ${error.message}`
         }
     }
 }

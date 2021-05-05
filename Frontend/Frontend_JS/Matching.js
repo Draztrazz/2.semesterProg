@@ -1,6 +1,18 @@
 let jwt = localStorage.getItem("JWT");
 let likedId = 0;
 
+fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+    .then((resp) => resp.json()
+    )
+    .then(function(data) {
+        console.log(data);
+        return true
+    })
+    .catch(function(err){
+        console.log(err)
+        location.href = '../Frontend_HTML/Frontpage.html'
+    });
+
 const minAge = document.getElementById('minAge');
 const maxAge = document.getElementById('maxAge');
 const gender = document.getElementById('gender1');
@@ -68,7 +80,7 @@ function findUsers(){
 
     const minAge1 = document.getElementById('minAge').value;
     const maxAge1 = document.getElementById('maxAge').value;
-    const gender1 = document.getElementById('gender1').value;
+    const gender1 = gender.options[gender.selectedIndex].value
 
 
     fetch(`http://localhost:7071/api/match?id=${jwt}&minAge=${minAge1}&maxAge=${maxAge1}&gender=${gender1}`)
@@ -84,6 +96,8 @@ function findUsers(){
                 likedId = data.Id
             }) .catch((err) =>{
                 console.log(err)
+                alert('There are no more people to view. Try again later.')
+                location.href = '../Frontend_HTML/Homepage.html'
             })
 }
 
@@ -102,6 +116,7 @@ fetch('http://localhost:7071/api/match', {
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
+                alert("You've got a match!")
                 findUsers()
             }) .catch((err) =>{
                 console.log(err)

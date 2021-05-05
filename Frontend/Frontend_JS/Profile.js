@@ -39,7 +39,7 @@ deleteButton.addEventListener("click", function(){
         } else if(deleteUserBox == "DELETE") {
             fetch(`http://localhost:7071/api/profile`, {
                 method: "DELETE",
-                body: JSON.stringify({id: jwt}),//nu piller vi ikke mere ved delete - det her virker måske. vi har ændret i jwt-controller
+                body: JSON.stringify({id: jwt}),
                 headers: {
                     "Content-Type": "application/json; charset-UTF-8"
                 }
