@@ -70,7 +70,7 @@ async function post(context, req){
     } catch(error) {
         console.log(error.message)
         context.res = {
-            body: JSON.stringify(error.message)
+            body: `${error.message}`
         }
     }
 }
