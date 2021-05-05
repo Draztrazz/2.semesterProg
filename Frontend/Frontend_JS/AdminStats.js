@@ -29,10 +29,10 @@ showAllStats.addEventListener('click', () => {
             console.log(data)
             // dette henviser til den første kolonne i sql
             document.getElementById("userinfo").innerHTML = "The system currently has " + data[0].value + " users"
-            console.log("You have succesfully retrieved all data")
+            //console.log("You have succesfully retrieved all data")
             // dette henviser til den anden kolonne i sql
             document.getElementById("matchinfo").innerHTML = "The system currently has " + data[1].value + " matches"
-            console.log("You have succesfully retrieved all data") 
+            //console.log("You have succesfully retrieved all data") 
         })
         .catch(function(err){
             console.log(err)

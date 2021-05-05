@@ -46,7 +46,7 @@ async function get(context, req){
         };
     } catch(error) {
         console.log(error)
-        context.res = {
+        context.error = {
             status: 400,
             body: `${error.message}`
         }

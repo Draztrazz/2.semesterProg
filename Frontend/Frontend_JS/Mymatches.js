@@ -52,7 +52,7 @@ await fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
         viewButton();
     })
     .catch(function(err){
-        console.error('Something went wrong', err)
+        console.log(err)
         alert("You've got no current matches.")
     })
 }
