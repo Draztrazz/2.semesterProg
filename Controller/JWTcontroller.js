@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 // denne funktion laber en jwt-token ud fra den bruger, som logger ind i systemet
 async function generateToken(user){
-    let realToken = jwt.sign({user: user[0].value}, 'secretkey'
+    let realToken = jwt.sign({user: user[0].value}, 'thekey'
     )
     return JSON.stringify(realToken)
 }
@@ -11,7 +11,7 @@ module.exports.generateToken = generateToken;
 
 // denne funktion laber en jwt-token ud fra den bruger, som logger ind i systemet
 async function generateOtherToken(user){
-    let realToken = jwt.sign({user: user}, 'secretkey'
+    let realToken = jwt.sign({user: user}, 'thekey'
     )
     return realToken
 }
@@ -34,7 +34,7 @@ async function authenticateToken(req){
     const token = req.query.id || req.body.id || req.body.id1
     if (token == null){return res.sendStatus(401)}
 
-    decoded = jwt.verify(token, 'secretkey')
+    decoded = jwt.verify(token, 'thekey')
     return decoded.user
     }
 
@@ -47,7 +47,7 @@ async function authenticateOtherToken(req){
     const token = req.body.id2
     if (token == null){return res.sendStatus(401)}
 
-    decoded = jwt.verify(token, 'secretkey')
+    decoded = jwt.verify(token, 'thekey')
     return decoded.user
     }
 
