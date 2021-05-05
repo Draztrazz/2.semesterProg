@@ -69,7 +69,7 @@ function select(username, password){
         where username = @username AND password = @password
         UPDATE users.[user]
         SET age = DATEDIFF(hour, users.[user].dob, GETDATE())/8766
-        where username = @nikoline123 AND password = @password`
+        where username = @username AND password = @password`
     const request = new Request(sql, (err, rowCount) => {
          if(err){
             reject(err)
