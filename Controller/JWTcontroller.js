@@ -18,15 +18,6 @@ async function generateOtherToken(user){
 // her eksporterer vi funktionen, således at vi kan anvende den i andre js-filer
 module.exports.generateOtherToken = generateOtherToken;
 
-/*async function authenticateToken(req){
-    const token = req.query.id
-    if (token == null){return res.sendStatus(401)}
-
-    decoded = jwt.verify(token, 'secretkey')
-    return decoded.user
-    }
-
-module.exports.authenticateToken = authenticateToken*/
 
 // denne funktion vurderer om det er en eksisterende jwt-token, der forsøger at tilgå systemet
 async function authenticateToken(req){
