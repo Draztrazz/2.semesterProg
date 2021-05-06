@@ -29,13 +29,13 @@ setPreferences.addEventListener('click', function(e) {
 
 likeButton.addEventListener('click', function(e) {
     e.preventDefault()
-    let opinion = likeButton.value
+    let opinion = Number(document.getElementById("likeButton").value);
     swipe(opinion)
 })
 
 dislikeButton.addEventListener('click', function(e) {
     e.preventDefault()
-    let opinion = dislikeButton.value
+    let opinion = Number(document.getElementById("dislikeButton").value);
     swipe(opinion)
 })
 
