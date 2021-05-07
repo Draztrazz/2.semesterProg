@@ -238,6 +238,7 @@ module.exports.selectMatch = selectMatch;
 
 // dette er vores like og dislike funktion, hvor vi indsætter like eller dislike ind i vores match tabel
 function insertOpinion(payload){
+    console.log(payload.userStatus)
     return new Promise((resolve, reject) => {
     const sql = 'INSERT INTO [users].[match] (id1, status, id2) VALUES (@id1, @userStatus, @id2)'
     const request = new Request(sql, (err) => {
