@@ -10,6 +10,8 @@ window.addEventListener('load', () => {
             console.log(data);
             if(data[3].value == true){
                 location.href = '../Frontend_HTML/Adminpage.html'
+            } else if(data.message != null){
+                location.href = '../Frontend_HTML/Frontpage.html'
             } else {
                 return false
             }
