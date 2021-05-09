@@ -51,7 +51,6 @@ function insert(payload){
 
         // hvis det er en succes, printer vi nedenstående for at vise, at vi har fået en bruger mere i vores db
         request.on('requestCompleted', (row) => {
-            console.log('User inserted', row);
             resolve('user inserted', row)
         });
         connection.execSql(request)

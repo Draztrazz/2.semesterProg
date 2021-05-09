@@ -6,7 +6,11 @@ fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
     )
     .then(function(data) {
         console.log(data);
-        return true
+        if(data.message != null){
+            location.href = '../Frontend_HTML/Frontpage.html'
+        } else {
+            return false
+        }
     })
     .catch(function(err){
         console.log(err)

@@ -7,7 +7,11 @@ window.addEventListener('load', () => {
         .then(function(data) {
             // hvis der findes en eksisterende jwt-token, er forbrugeren logget ind og redirectes dermed til homepage for brugeren
             console.log(data);
-            location.href = '../Frontend_HTML/Homepage.html'
+            if(data.message != null){
+                return false
+            } else {
+                location.href = '../Frontend_HTML/Homepage.html'
+            }
         })
         .catch(function(err){
             console.log(err)
