@@ -36,13 +36,17 @@ form.addEventListener('submit', function(e) {
         // hvis det er en succes, sættes en JWT og brugeren tilgår homepage
         .then(function(data) {
             console.log(data);
+            if(data.message != null){
+                alert('Either username or password is incorrect.')
+            } else {
             localStorage.setItem("JWT", data);
             location.href = '../Frontend_HTML/Homepage.html';
+            }
         })
         // er det en fejl, kastes nedenstående fejlbesked
         .catch(function(err){
             console.log(err)
-            alert('Either username or password is incorrect.')
+            alert('Something went wrong.')
         })
 })
 
