@@ -7,8 +7,10 @@ fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
             console.log(data);
             if(data[3].value == true){
                 return true
-            } else {
+            } else if(data.message != null){
                 location.href = '../Frontend_HTML/Frontpage.html'
+            } else {
+                location.href = '../Frontend_HTML/Homepage.html'
             }
         })
         .catch(function(err){
