@@ -75,7 +75,7 @@ function select(username, password){
             reject(err)
             console.log(err)
         } else if (rowCount == 0) {
-            reject({message: 'User does not exist'})}
+            reject({message: 'User does not exist.'})}
         }
     );
     request.addParameter('username', TYPES.VarChar, username)
