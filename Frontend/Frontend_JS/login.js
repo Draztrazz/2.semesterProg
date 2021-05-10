@@ -32,10 +32,6 @@ form.addEventListener('submit', function(e) {
 
     fetch(`http://localhost:7071/api/login?username=${username1}&password=${password1}`)
         .then((resp) => resp.json()
-            /*if(response.status !==  200){
-                console.log("Something went wrong" + response.status)
-                return
-            }*/
         )
         // hvis det er en succes, sættes en JWT og brugeren tilgår homepage
         .then(function(data) {
