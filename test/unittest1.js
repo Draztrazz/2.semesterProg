@@ -14,7 +14,6 @@ describe('Login user function', () => {
 
         .end((err, res) => {
             res.body = JSON.parse(res.text)
-            console.log(res.body)
             expect(err).to.be.null;
             expect(res).to.have.status(200);
             expect(res.body).to.be.a('string');
@@ -30,7 +29,6 @@ describe('Login user function', () => {
 
         .end((err, res) => {
             res.body = JSON.parse(res.text)
-            console.log(res.body)
             expect(err).to.be.null;
             expect(res).to.have.status(400);
             expect(res.body).to.be.a('object');
@@ -47,7 +45,6 @@ describe('Login user function', () => {
 
         .end((err, res) => {
             res.body = JSON.parse(res.text)
-            console.log(res.body)
             expect(err).to.be.null;
             expect(res).to.have.status(400);
             expect(res.body).to.be.a('object');
@@ -55,16 +52,15 @@ describe('Login user function', () => {
             done();
         })
     })
-    it('Should return an error', (done) => { //tester for den forventede fejl-besked ved et tomt brugernavn og password input
+    it('Should return an error message', (done) => { //tester for den forventede fejl-besked ved et tomt brugernavn og password input
         let username = '';
         let password = '';
         chai.request('http://localhost:7071/api')
-
+        
         .get(`/login?username=${username}&password=${password}`)
 
         .end((err, res) => {
             res.body = JSON.parse(res.text)
-            console.log(res.body)
             expect(err).to.be.null;
             expect(res).to.have.status(400);
             expect(res.body).to.be.a('object');

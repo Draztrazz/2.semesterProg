@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "func start",
-    "test": "mocha --timeout 2000"
+    "test": "mocha --timeout 5000"
   },
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
