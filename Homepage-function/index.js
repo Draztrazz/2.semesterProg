@@ -37,9 +37,10 @@ async function get(context, req){
             }
         }
     catch(error) {
+        let notValid = {message: 'Validation failed'}
         context.res = {
             status: 400,
-            body: `Error - ${error.message}`
+            body: notValid
         }
     }
 }

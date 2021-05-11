@@ -6,7 +6,11 @@ fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
     )
     .then(function(data) {
         console.log(data);
-        return true
+        if(data.message != null){
+            location.href = '../Frontend_HTML/Frontpage.html'
+        } else {
+            return false
+        }
     })
     .catch(function(err){
         console.log(err)
@@ -29,13 +33,13 @@ setPreferences.addEventListener('click', function(e) {
 
 likeButton.addEventListener('click', function(e) {
     e.preventDefault()
-    let opinion = likeButton.value
+    let opinion = Number(document.getElementById("likeButton").value);
     swipe(opinion)
 })
 
 dislikeButton.addEventListener('click', function(e) {
     e.preventDefault()
-    let opinion = dislikeButton.value
+    let opinion = Number(document.getElementById("dislikeButton").value);
     swipe(opinion)
 })
 

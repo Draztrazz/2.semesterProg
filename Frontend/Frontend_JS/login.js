@@ -11,7 +11,11 @@ window.addEventListener('load', () => {
         .then(function(data) {
             // hvis der findes en eksisterende jwt-token, er forbrugeren logget ind og redirectes dermed til homepage for brugeren
             console.log(data);
-            location.href = '../Frontend_HTML/Homepage.html'
+            if(data.message != null){
+                return false
+            } else {
+                location.href = '../Frontend_HTML/Homepage.html'
+            }
         })
         .catch(function(err){
             console.log(err)
@@ -28,21 +32,21 @@ form.addEventListener('submit', function(e) {
 
     fetch(`http://localhost:7071/api/login?username=${username1}&password=${password1}`)
         .then((resp) => resp.json()
-            /*if(response.status !==  200){
-                console.log("Something went wrong" + response.status)
-                return
-            }*/
         )
         // hvis det er en succes, sættes en JWT og brugeren tilgår homepage
         .then(function(data) {
             console.log(data);
+            if(data.message != null){
+                alert('Either username or password is incorrect.')
+            } else {
             localStorage.setItem("JWT", data);
             location.href = '../Frontend_HTML/Homepage.html';
+            }
         })
         // er det en fejl, kastes nedenstående fejlbesked
         .catch(function(err){
             console.log(err)
-            alert('Either username or password is incorrect.')
+            alert('Something went wrong.')
         })
 })
 

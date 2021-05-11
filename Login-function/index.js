@@ -38,7 +38,7 @@ async function get(context, req){
     } catch(error) {
         context.res = {
             status: 400,
-            body: `No user - ${error.message}`
+            body: error
         }
     }
 }

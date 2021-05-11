@@ -51,7 +51,6 @@ function insert(payload){
 
         // hvis det er en succes, printer vi nedenstående for at vise, at vi har fået en bruger mere i vores db
         request.on('requestCompleted', (row) => {
-            console.log('User inserted', row);
             resolve('user inserted', row)
         });
         connection.execSql(request)
@@ -75,7 +74,7 @@ function select(username, password){
             reject(err)
             console.log(err)
         } else if (rowCount == 0) {
-            reject({message: 'User does not exist'})}
+            reject({message: 'User does not exist.'})}
         }
     );
     request.addParameter('username', TYPES.VarChar, username)
@@ -238,6 +237,7 @@ module.exports.selectMatch = selectMatch;
 
 // dette er vores like og dislike funktion, hvor vi indsætter like eller dislike ind i vores match tabel
 function insertOpinion(payload){
+    console.log(payload.userStatus)
     return new Promise((resolve, reject) => {
     const sql = 'INSERT INTO [users].[match] (id1, status, id2) VALUES (@id1, @userStatus, @id2)'
     const request = new Request(sql, (err) => {

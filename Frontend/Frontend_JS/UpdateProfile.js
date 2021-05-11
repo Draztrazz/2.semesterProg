@@ -61,9 +61,6 @@ function checkInputs(){
     } else {
         setSuccesFor(dob);
     }
-    /*if (bioValue == ''){
-        bioValue = 'You have not yet written your own bio.'
-    }*/
 
     // hvis validering er succesfuld, så igangsættes nedenstående funktion
     if(inputValidated == true){
