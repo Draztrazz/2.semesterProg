@@ -40,7 +40,7 @@ form.addEventListener('submit', function(e) {
 // denne funktion validerer inputs
 function checkInputs(){
     let inputValidated = true;
-
+    console.log(gender.value)
     // vi finder den indtastede værdi fra inputfelterne i html
     const usernameValue = username.value;
     const passwordValue = password.value;
