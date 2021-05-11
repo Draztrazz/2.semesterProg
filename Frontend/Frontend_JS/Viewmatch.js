@@ -1,8 +1,9 @@
 let matchedUser = localStorage.getItem("viewedMatch");
 let jwt = localStorage.getItem("JWT");
 
-
-fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+window.addEventListener('load', () => {
+    async function fetchAwait(){
+    await fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
     .then((resp) => resp.json()
     )
     .then(function(data) {
@@ -19,7 +20,7 @@ fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
     });
 
 
-fetch(`http://localhost:7071/api/mymatch`, {
+await fetch(`http://localhost:7071/api/mymatch`, {
     method: "POST",
     body: JSON.stringify({
         id: matchedUser
@@ -43,3 +44,6 @@ fetch(`http://localhost:7071/api/mymatch`, {
     .catch(function(err){
         console.log(err)
     })
+}
+fetchAwait();
+})
