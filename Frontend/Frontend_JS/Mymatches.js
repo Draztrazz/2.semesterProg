@@ -1,9 +1,9 @@
 let jwt = localStorage.getItem("JWT");
-//let matchedArray = [];
 
 window.addEventListener('load', () => {
-async function fetchAwait(){
-await fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
+async function fetchAwait(){ //da 2 HTTP-requests skal udføres når siden loader er disse sat ind i en async funktion
+                            // sådan at de venter på hinanden
+await fetch(`http://localhost:7071/api/homepage?id=${jwt}`) //som altid bliver brugeren først godkendt
     .then((resp) => resp.json()
     )
     .then(function(data) {
@@ -20,11 +20,11 @@ await fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
     });
 
 
-await fetch(`http://localhost:7071/api/mymatch?id=${jwt}`)
+await fetch(`http://localhost:7071/api/mymatch?id=${jwt}`) //her hentes brugerens matches
     .then((resp) => resp.json()
     )
     .then(function(data) {
-        for(let i=0; i<data.length;i++){
+        for(let i=0; i<data.length;i++){ //for hvert objekt i det tilbagesendte array vil en ny række blive oprettet i html
             var box = document.createElement('div');
             box.setAttribute('id', 'small-container');
             var tag = document.createElement('label');
@@ -101,21 +101,6 @@ function viewButton(){
     viewButton[i].addEventListener('click', function(){
         localStorage.setItem('viewedMatch', viewButton[i].value)
         location.href = '../Frontend_HTML/Viewmatch.html'
-        /*fetch(`http://localhost:7071/api/mymatch`, {
-            method: "POST",
-            body: JSON.stringify({id: jwt}),
-            headers: {
-                "Content-Type": "application/json; charset-UTF-8"
-            }
-            })
-            .then((resp) => resp.json()
-            )
-            .then(function(data) {
-                console.log(data)
-            })
-            .catch(function(err){
-                console.log(err)
-            })*/
         })
     }
 }

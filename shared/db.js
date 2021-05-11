@@ -335,7 +335,7 @@ function ageUpdate(username){
 module.exports.ageUpdate = ageUpdate;
 
 function showMatches(id){
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { //here hentes de nødvendige informationer om de brugere som der er blevet matchet med
     const sql = `SELECT m.id1, m.id2, u.id, u.username, u.firstname, u.lastname FROM (
                             SELECT *
                             FROM users.matchTable
@@ -365,7 +365,7 @@ module.exports.showMatches = showMatches;
 //'SELECT * FROM ( SELECT * FROM users.matchTable WHERE id1 = @id OR id2 = @id ) as m INNER JOIN users.[user] as u ON m.id1 = u.id OR m.id2 = u.id WHERE u.id <> @id'
 
 function deleteMatch(id1, id2){
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { //finder 1 række hvor at de pågælende id'er stemmer overens
     const sql = 'DELETE FROM [users].[matchTable] WHERE id1 = @id1 AND id2 = @id2 OR id1 = @id2 AND id2 = @id1'
     const request = new Request(sql, (err, rowCount) => {
          if(err){
@@ -387,7 +387,7 @@ function deleteMatch(id1, id2){
 module.exports.deleteMatch = deleteMatch;
 
 function deleteLikes(id1, id2){
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { //sletter de 2 rækker hvor at de pågældende id'er passer
     const sql = 'DELETE FROM [users].[match] WHERE id1 = @id1 AND id2 = @id2 OR id1 = @id2 AND id2 = @id1'
     const request = new Request(sql, (err, rowCount) => {
          if(err){

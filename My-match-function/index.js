@@ -30,9 +30,9 @@ module.exports = async function (context, req) {
 async function get(context, req){
     try{
         let loggedId = await jwtController.authenticateToken(req)
-        let matches = await db.showMatches(loggedId)
+        let matches = await db.showMatches(loggedId) //kalder db funktionen, som henter alle brugerens matches
         let matchedArray = []
-        for(let i=0; i<matches.length;i++){
+        for(let i=0; i<matches.length;i++){ //loopet fylder et tomt array med objekter der indeholder id og navn på brugerens matches
                 let matchedUser = {
                     id: await jwtController.generateOtherToken(matches[i][2].value),
                     firstname: matches[i][4].value,
@@ -54,11 +54,11 @@ async function get(context, req){
 }
 
 
-async function post(context, req){
+async function post(context, req){ //dette er meget lige profile get requesten, dog gjort som en post request
     try{
         let viewedMatchId = await jwtController.authenticateToken(req)
-        let matchedUser = await db.idSelect(viewedMatchId)
-        let matchedUserInfo = {
+        let matchedUser = await db.idSelect(viewedMatchId) //henter bruger informationer
+        let matchedUserInfo = { //sætter disse inde i et objekt
             firstname: matchedUser[5].value,
             lastname: matchedUser[6].value,
             gender: matchedUser[7].value,
@@ -80,10 +80,10 @@ async function post(context, req){
 
 async function deleteFunction(context, req){
     try{
-       let id1 = await jwtController.authenticateToken(req);
-       let id2 = await jwtController.authenticateOtherToken(req);
-       await db.deleteMatch(id1, id2);
-       await db.deleteLikes(id1, id2);
+       let id1 = await jwtController.authenticateToken(req); //decoder bruger id
+       let id2 = await jwtController.authenticateOtherToken(req); //decoder matched bruger id
+       await db.deleteMatch(id1, id2); //sletter række i matchTable
+       await db.deleteLikes(id1, id2); //sletter likes i like table
         context.res = {
             body: {status: 'Succes'}
             }
