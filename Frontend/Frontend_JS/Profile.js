@@ -33,10 +33,10 @@ deleteButton.addEventListener("click", function(){
          // det ses, at funktionen virker ved at man skriver DELETE for at slette en bruger. Dette skal stå i en inputboks, der kommer frem, når man trykker på ovenstående knap
         var deleteUserBox = prompt("Please enter DELETE to delete your profile:",);
         // hvis der ikke er noget input eller lignende, sker der ikke noget - profilen slettes ikke
-        if (deleteUserBox == null || deleteUserBox == "") {
+        if (deleteUserBox != "DELETE") {
             txt = "You have not deleted your profile";
             // hvis inputtet er rigtigt (DELETE), så igangsættes vores fetch, der sletter en bruger ud fra brugerid
-        } else if(deleteUserBox == "DELETE") {
+        } else {
             fetch(`http://localhost:7071/api/profile`, {
                 method: "DELETE",
                 body: JSON.stringify({id: jwt}),
