@@ -17,3 +17,10 @@ fetch(`http://localhost:7071/api/homepage?id=${jwt}`)
             console.log(err)
             location.href = '../Frontend_HTML/Frontpage.html'
         })
+
+let logoutButton = document.getElementById("logout");
+
+logoutButton.addEventListener("click", function(){
+    localStorage.removeItem('JWT')
+    location.href = '../Frontend_HTML/Frontpage.html'
+})

@@ -23,11 +23,11 @@ window.addEventListener('load', () => {
 })
 
 // her henvises der til den knap, der skal logge brugeren ud af systemet
-let updateButton = document.getElementById("logout");
+let logoutButton = document.getElementById("logout");
 
 // log out funktionen viser således, at vi fjerner den jwt-token, der anvendes til at tilgå systemet
 // herefter redirectes brugeren til vores frontpage, hvor man kan logge ind eller oprette en ny bruger
-updateButton.addEventListener("click", function(){
+logoutButton.addEventListener("click", function(){
     localStorage.removeItem('JWT')
     location.href = '../Frontend_HTML/Frontpage.html'
 })
